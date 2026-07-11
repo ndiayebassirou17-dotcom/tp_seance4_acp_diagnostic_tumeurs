@@ -1,0 +1,558 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.23.9",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"tutorial-quickstart-with-python\">Tutorial \u2014 Quickstart with Python</h1>\n<span class=\"paragraph\"><strong>Cours : Analyse de donn\u00e9es \u2014 IPSL \u00b7 2025\u20132026</strong></span>\n<span class=\"paragraph\">Ce tutoriel est organis\u00e9 en trois parties :</span>\n<table>\n<thead>\n<tr>\n<th>Partie</th>\n<th>Contenu</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Partie 1</strong></td>\n<td>Marimo \u2014 concepts cl\u00e9s du notebook r\u00e9actif</td>\n</tr>\n<tr>\n<td><strong>Partie 2</strong></td>\n<td>Bases de Python \u2014 types, structures, fonctions, POO</td>\n</tr>\n<tr>\n<td><strong>Partie 3</strong></td>\n<td>Librairies \u2014 numpy, pandas, polars, seaborn, statsmodels, scikit-learn</td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h1 id=\"partie-1-marimo-le-notebook-reactif\">Partie 1 \u00b7 Marimo \u2014 Le Notebook R\u00e9actif</h1>\n<h2 id=\"pourquoi-marimo\">Pourquoi Marimo ?</h2>\n<span class=\"paragraph\">Marimo est une alternative moderne \u00e0 Jupyter con\u00e7ue pour corriger ses d\u00e9fauts fondamentaux.</span>\n<table>\n<thead>\n<tr>\n<th>Probl\u00e8me Jupyter</th>\n<th>Solution Marimo</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Cellules ex\u00e9cut\u00e9es dans n'importe quel ordre \u2192 r\u00e9sultats incoh\u00e9rents</td>\n<td>Ex\u00e9cution <strong>d\u00e9terministe</strong> : chaque cellule s'ex\u00e9cute dans l'ordre du graphe de d\u00e9pendances</td>\n</tr>\n<tr>\n<td>\u00c9tat cach\u00e9 entre les cellules</td>\n<td>Pas d'\u00e9tat global partag\u00e9 : chaque variable n'appartient qu'\u00e0 <strong>une seule cellule</strong></td>\n</tr>\n<tr>\n<td>Pas de r\u00e9activit\u00e9 native</td>\n<td>Re-ex\u00e9cution <strong>automatique</strong> des cellules d\u00e9pendantes quand une valeur change</td>\n</tr>\n<tr>\n<td>Difficile \u00e0 versionner (format JSON)</td>\n<td>Fichier <code>.py</code> pur, lisible, diffable avec <code>git</code></td>\n</tr>\n</tbody>\n</table>\n<h2 id=\"concepts-fondamentaux\">Concepts fondamentaux</h2>\n<h3 id=\"1-les-cellules-et-le-graphe-de-dependances\">1 \u00b7 Les cellules et le graphe de d\u00e9pendances</h3>\n<span class=\"paragraph\">Marimo analyse les <strong>entr\u00e9es</strong> (variables consomm\u00e9es) et <strong>sorties</strong> (variables produites)\nde chaque cellule pour construire un <strong>DAG</strong> (graphe acyclique dirig\u00e9).</span>\n<span class=\"paragraph\"><div class=\"language-text codehilite\"><pre><span></span><code>Cellule A  \u2192  produit  x\nCellule B  \u2192  consomme x, produit y\nCellule C  \u2192  consomme y\n</code></pre></div>\nSi A change \u2192 B et C sont <strong>automatiquement</strong> re-ex\u00e9cut\u00e9es.</span>\n<h3 id=\"2-regle-une-variable-une-cellule\">2 \u00b7 R\u00e8gle : une variable = une cellule</h3>\n<span class=\"paragraph\">Une variable ne peut \u00eatre <strong>d\u00e9finie que dans une seule cellule</strong>.\nSi deux cellules d\u00e9finissent <code>x</code>, marimo signale une erreur <code>multiple-definitions</code>.</span>\n<blockquote>\n<span class=\"paragraph\"><strong>Astuce :</strong> Pr\u00e9fixer avec <code>_</code> (ex: <code>_temp</code>) rend la variable <strong>priv\u00e9e</strong> \u00e0 sa cellule\net \u00e9vite les conflits.</span>\n</blockquote>\n<h3 id=\"3-mo-lobjet-marimo\">3 \u00b7 <code>mo</code> \u2014 L'objet marimo</h3>\n<span class=\"paragraph\"><code>mo</code> est l'objet central de marimo. Il fournit :</span>\n<ul>\n<li><code>mo.md()</code> : rendu Markdown / LaTeX</li>\n<li><code>mo.ui.*</code> : widgets interactifs (slider, dropdown, checkbox\u2026)</li>\n<li><code>mo.stat()</code> : affichage de statistiques</li>\n<li><code>mo.hstack()</code> / <code>mo.vstack()</code> : mise en page des \u00e9l\u00e9ments</li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"11-momd-texte-markdown-et-latex\">1.1 \u00b7 <code>mo.md()</code> \u2014 Texte, Markdown et LaTeX</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><code>mo.md()</code> permet d'\u00e9crire du <strong>Markdown enrichi</strong> avec du LaTeX dans n'importe quelle cellule.</span>\n<span class=\"paragraph\">Exemples de rendu :</span>\n<ul>\n<li><strong>Gras</strong>, <em>italique</em>, <code>code inline</code></li>\n<li>Liste \u00e0 puces ou num\u00e9rot\u00e9e</li>\n<li>Tableau Markdown</li>\n<li>Formule inline : <marimo-tex class=\"arithmatex\">||(\\bar{x} = \\frac{1}{n}\\sum x_i||)</marimo-tex></li>\n<li>Formule bloc :</li>\n</ul>\n<marimo-tex class=\"arithmatex\">||[\\sigma^2 = \\frac{1}{n-1}\\sum_{i=1}^{n}(x_i - \\bar{x})^2||]</marimo-tex><blockquote>\n<span class=\"paragraph\"><strong>Astuce :</strong> Utiliser <code>r\"\\\"\\\"...\"\\\"\\\"</code> (raw string) pour \u00e9viter les conflits\nentre les <code>\\</code> LaTeX et les s\u00e9quences d'\u00e9chappement Python.</span>\n</blockquote></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"12-moui-widgets-interactifs\">1.2 \u00b7 <code>mo.ui</code> \u2014 Widgets Interactifs</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><blockquote>\n<span class=\"paragraph\"><strong>R\u00e9activit\u00e9 :</strong> Modifie le slider ou le dropdown ci-dessus \u2014\nle graphique se met \u00e0 jour <strong>instantan\u00e9ment</strong> sans cliquer sur \"Run\".\nC'est la diff\u00e9rence fondamentale avec Jupyter.</span>\n</blockquote></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"13-autres-widgets-utiles\">1.3 \u00b7 Autres Widgets Utiles</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"14-mostat-et-mohstack-movstack-mise-en-page\">1.4 \u00b7 <code>mo.stat()</code> et <code>mo.hstack</code> / <code>mo.vstack</code> \u2014 Mise en page</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"15-bonnes-pratiques-marimo\">1.5 \u00b7 Bonnes Pratiques Marimo</h2>\n<h3 id=\"structure-recommandee-dun-notebook\">Structure recommand\u00e9e d'un notebook</h3>\n<div class=\"language-text codehilite\"><pre><span></span><code>Cellule 1 : imports globaux  (numpy, pandas, etc.)\nCellule 2 : chargement des donn\u00e9es\nCellule 3 : nettoyage / pr\u00e9paration\nCellules 4+ : analyses, visualisations, widgets\n</code></pre></div>\n<h3 id=\"regles-a-respecter\">R\u00e8gles \u00e0 respecter</h3>\n<table>\n<thead>\n<tr>\n<th>R\u00e8gle</th>\n<th>Pourquoi</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Une variable d\u00e9finie dans <strong>une seule</strong> cellule</td>\n<td>\u00c9vite <code>multiple-definitions</code></td>\n</tr>\n<tr>\n<td>Pr\u00e9fixer les variables de boucle avec <code>_</code></td>\n<td>Les rend priv\u00e9es \u00e0 la cellule</td>\n</tr>\n<tr>\n<td>Ne pas modifier un DataFrame import\u00e9 dans une autre cellule</td>\n<td>Utiliser <code>.copy()</code></td>\n</tr>\n<tr>\n<td>Les cellules <code>hide_code=True</code> servent aux explications</td>\n<td>S\u00e9parer texte et code</td>\n</tr>\n<tr>\n<td>Retourner la figure (<code>fig</code>) ou la laisser en derni\u00e8re expression</td>\n<td>Pour l'afficher</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"raccourcis-clavier-utiles\">Raccourcis clavier utiles</h3>\n<table>\n<thead>\n<tr>\n<th>Raccourci</th>\n<th>Action</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>Ctrl + Enter</code></td>\n<td>Ex\u00e9cuter la cellule courante</td>\n</tr>\n<tr>\n<td><code>Shift + Enter</code></td>\n<td>Ex\u00e9cuter et passer \u00e0 la suivante</td>\n</tr>\n<tr>\n<td><code>Ctrl + Shift + R</code></td>\n<td>Re-ex\u00e9cuter tout le notebook</td>\n</tr>\n<tr>\n<td><code>Ctrl + /</code></td>\n<td>Commenter / d\u00e9commenter</td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h1 id=\"partie-2-bases-de-python\">Partie 2 \u00b7 Bases de Python</h1>\n<h2 id=\"pourquoi-python-pour-lanalyse-de-donnees\">Pourquoi Python pour l'Analyse de Donn\u00e9es ?</h2>\n<span class=\"paragraph\">Apparu en 1991, Python s'est impos\u00e9 comme <strong>le</strong> langage de r\u00e9f\u00e9rence pour la data science.\nPlusieurs raisons expliquent ce succ\u00e8s :</span>\n<table>\n<thead>\n<tr>\n<th>Atout</th>\n<th>Explication</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>\u00c9cosyst\u00e8me riche</strong></td>\n<td><code>numpy</code>, <code>pandas</code>, <code>scikit-learn</code>, <code>statsmodels</code>\u2026 couvrent tous les besoins</td>\n</tr>\n<tr>\n<td><strong>Lisibilit\u00e9</strong></td>\n<td>Syntaxe proche du pseudo-code \u2014 rapide \u00e0 apprendre, facile \u00e0 maintenir</td>\n</tr>\n<tr>\n<td><strong>Langage universel</strong></td>\n<td>Prototypage <em>et</em> mise en production dans le m\u00eame environnement</td>\n</tr>\n<tr>\n<td><strong>Interop\u00e9rabilit\u00e9</strong></td>\n<td>Int\u00e8gre nativement du code C/C++/Fortran via des extensions (NumPy en est un exemple)</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"python-est-un-langage-interprete\">Python est un langage interpr\u00e9t\u00e9</h3>\n<span class=\"paragraph\">Contrairement \u00e0 C++ ou Java qui sont <strong>compil\u00e9s</strong> (le code source est traduit en langage machine\navant l'ex\u00e9cution), Python est <strong>interpr\u00e9t\u00e9</strong> : un programme appel\u00e9 <em>interpr\u00e9teur</em> lit et ex\u00e9cute\nle code <strong>ligne par ligne</strong>, \u00e0 la vol\u00e9e.</span>\n<div class=\"language-text codehilite\"><pre><span></span><code>Code source (.py)  \u2192  Interpr\u00e9teur Python  \u2192  Ex\u00e9cution\n                          (CPython)\n</code></pre></div>\n<span class=\"paragraph\"><strong>Cons\u00e9quences pratiques :</strong></span>\n<ul>\n<li>\u2705 <strong>Interactivit\u00e9</strong> : on peut tester une ligne de code imm\u00e9diatement (REPL, notebooks)</li>\n<li>\u2705 <strong>Portabilit\u00e9</strong> : le m\u00eame fichier <code>.py</code> tourne sur Windows, Linux, macOS</li>\n<li>\u26a0\ufe0f <strong>Vitesse</strong> : plus lent que C/C++ pour les calculs intensifs \u2014 compens\u00e9 par des librairies\n  compil\u00e9es (<code>numpy</code> ex\u00e9cute ses op\u00e9rations en C, pas en Python pur)</li>\n<li>\u26a0\ufe0f <strong>GIL</strong> : le <em>Global Interpreter Lock</em> limite le vrai parall\u00e9lisme multi-thread,\n  mais les extensions C (comme NumPy) y \u00e9chappent</li>\n</ul>\n<blockquote>\n<span class=\"paragraph\"><strong>En pratique :</strong> le \"vrai\" calcul est d\u00e9l\u00e9gu\u00e9 \u00e0 des librairies compil\u00e9es.\nPython joue le r\u00f4le de <strong>langage de colle</strong> (<em>glue language</em>) \u2014 expressif, lisible,\net suffisamment rapide pour orchestrer des op\u00e9rations num\u00e9riques tr\u00e8s performantes.</span>\n</blockquote>\n<span class=\"paragraph\">Cette partie couvre les fondamentaux du langage Python n\u00e9cessaires\npour l'analyse de donn\u00e9es. Python est un langage <strong>interpr\u00e9t\u00e9, dynamiquement typ\u00e9,\n\u00e0 indentation significative</strong>.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"21-types-de-base-et-variables\">2.1 \u00b7 Types de Base et Variables</h2>\n<span class=\"paragraph\">Python est <strong>dynamiquement typ\u00e9</strong> : le type d'une variable est inf\u00e9r\u00e9 automatiquement\n\u00e0 l'assignation.</span>\n<table>\n<thead>\n<tr>\n<th>Type</th>\n<th>Exemple</th>\n<th>Remarque</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>int</code></td>\n<td><code>42</code></td>\n<td>Entier de pr\u00e9cision arbitraire</td>\n</tr>\n<tr>\n<td><code>float</code></td>\n<td><code>3.14</code></td>\n<td>Nombre d\u00e9cimal (64 bits)</td>\n</tr>\n<tr>\n<td><code>bool</code></td>\n<td><code>True</code>, <code>False</code></td>\n<td>Sous-classe de <code>int</code></td>\n</tr>\n<tr>\n<td><code>str</code></td>\n<td><code>\"bonjour\"</code></td>\n<td>Cha\u00eene immuable, Unicode</td>\n</tr>\n<tr>\n<td><code>NoneType</code></td>\n<td><code>None</code></td>\n<td>Absence de valeur</td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "qnkX",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "entier   : 42                    type \u2192 int\nflottant : 3.14159               type \u2192 float\nbooleen  : True                  type \u2192 bool\ntexte    : 'Analyse de donn\u00e9es'  type \u2192 str\nvide     : None                  type \u2192 NoneType\n\nCasting   : int('7')=7 | float(3)=3.0 | str(42)='42'\nOp\u00e9rations: 17//3=5 | 17%3=2 | 2**10=1024\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "TqIu",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Vxnm",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"22-structures-de-donnees\">2.2 \u00b7 Structures de Donn\u00e9es</h2>\n<table>\n<thead>\n<tr>\n<th>Structure</th>\n<th>Syntaxe</th>\n<th>Ordonn\u00e9</th>\n<th>Mutable</th>\n<th>Doublons</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>list</code></td>\n<td><code>[1, 2, 3]</code></td>\n<td>\u2705</td>\n<td>\u2705</td>\n<td>\u2705</td>\n</tr>\n<tr>\n<td><code>tuple</code></td>\n<td><code>(1, 2, 3)</code></td>\n<td>\u2705</td>\n<td>\u274c</td>\n<td>\u2705</td>\n</tr>\n<tr>\n<td><code>dict</code></td>\n<td><code>{\"a\": 1}</code></td>\n<td>\u2705 (3.7+)</td>\n<td>\u2705</td>\n<td>cl\u00e9s \u274c</td>\n</tr>\n<tr>\n<td><code>set</code></td>\n<td><code>{1, 2, 3}</code></td>\n<td>\u274c</td>\n<td>\u2705</td>\n<td>\u274c</td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "DnEU",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ulZA",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ecfG",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"23-structures-de-controle\">2.3 \u00b7 Structures de Contr\u00f4le</h2>\n<span class=\"paragraph\">Python d\u00e9limite les blocs par l'<strong>indentation</strong> (4 espaces), pas d'accolades.</span>\n<div class=\"language-python codehilite\"><pre><span></span><code><span class=\"k\">if</span> <span class=\"n\">condition</span><span class=\"p\">:</span>       <span class=\"k\">for</span> <span class=\"n\">element</span> <span class=\"ow\">in</span> <span class=\"n\">iterable</span><span class=\"p\">:</span>       <span class=\"k\">while</span> <span class=\"n\">condition</span><span class=\"p\">:</span>\n    <span class=\"o\">...</span>                 <span class=\"o\">...</span>                            <span class=\"o\">...</span>\n<span class=\"k\">elif</span> <span class=\"o\">...</span><span class=\"p\">:</span>           <span class=\"k\">else</span><span class=\"p\">:</span>                          <span class=\"k\">break</span> <span class=\"o\">/</span> <span class=\"k\">continue</span>\n    <span class=\"o\">...</span>                 <span class=\"o\">...</span>\n<span class=\"k\">else</span><span class=\"p\">:</span>\n    <span class=\"o\">...</span>\n</code></pre></div></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Pvdt",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ZBYS",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"24-fonctions\">2.4 \u00b7 Fonctions</h2>\n<table>\n<thead>\n<tr>\n<th>Style</th>\n<th>Exemple</th>\n<th>Remarque</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Positionnel</td>\n<td><code>f(1, 2)</code></td>\n<td>Ordre important</td>\n</tr>\n<tr>\n<td>Nomm\u00e9</td>\n<td><code>f(a=1, b=2)</code></td>\n<td>Ordre libre</td>\n</tr>\n<tr>\n<td>Valeur par d\u00e9faut</td>\n<td><code>def f(x, n=2)</code></td>\n<td>Argument optionnel</td>\n</tr>\n<tr>\n<td><code>*args</code></td>\n<td><code>def f(*args)</code></td>\n<td>Nombre variable de positionnels</td>\n</tr>\n<tr>\n<td><code>**kwargs</code></td>\n<td><code>def f(**kwargs)</code></td>\n<td>Nombre variable de nomm\u00e9s</td>\n</tr>\n<tr>\n<td><code>lambda</code></td>\n<td><code>lambda x: x**2</code></td>\n<td>Fonction anonyme en une ligne</td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "aLJB",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "nHfw",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"25-classes-et-programmation-orientee-objet\">2.5 \u00b7 Classes et Programmation Orient\u00e9e Objet</h2>\n<div class=\"language-python codehilite\"><pre><span></span><code><span class=\"k\">class</span><span class=\"w\"> </span><span class=\"nc\">NomClasse</span><span class=\"p\">:</span>\n    <span class=\"k\">def</span><span class=\"w\"> </span><span class=\"fm\">__init__</span><span class=\"p\">(</span><span class=\"bp\">self</span><span class=\"p\">,</span> <span class=\"o\">...</span><span class=\"p\">):</span>   <span class=\"c1\"># constructeur</span>\n        <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">attribut</span> <span class=\"o\">=</span> <span class=\"o\">...</span>\n    <span class=\"k\">def</span><span class=\"w\"> </span><span class=\"nf\">methode</span><span class=\"p\">(</span><span class=\"bp\">self</span><span class=\"p\">):</span> <span class=\"o\">...</span>     <span class=\"c1\"># m\u00e9thode d&#39;instance</span>\n</code></pre></div>\n<blockquote>\n<span class=\"paragraph\">En analyse de donn\u00e9es vous <strong>utilisez</strong> des classes en permanence :\n<code>DataFrame</code>, <code>LinearRegression</code>, <code>StandardScaler</code> sont toutes des classes.</span>\n</blockquote></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "xXTn",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "AjVT",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"26-gestion-des-erreurs\">2.6 \u00b7 Gestion des Erreurs</h2>\n<table>\n<thead>\n<tr>\n<th>Exception</th>\n<th>Cause fr\u00e9quente</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>ValueError</code></td>\n<td><code>int(\"abc\")</code></td>\n</tr>\n<tr>\n<td><code>TypeError</code></td>\n<td><code>\"a\" + 1</code></td>\n</tr>\n<tr>\n<td><code>KeyError</code></td>\n<td>Cl\u00e9 absente dans un dict</td>\n</tr>\n<tr>\n<td><code>IndexError</code></td>\n<td>Indice hors limites</td>\n</tr>\n<tr>\n<td><code>ZeroDivisionError</code></td>\n<td>Division par z\u00e9ro</td>\n</tr>\n<tr>\n<td><code>FileNotFoundError</code></td>\n<td>Fichier inexistant</td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "pHFh",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "NCOB",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h1 id=\"partie-3-librairies-python-pour-lanalyse-de-donnees\">Partie 3 \u00b7 Librairies Python pour l'Analyse de Donn\u00e9es</h1>\n<table>\n<thead>\n<tr>\n<th>#</th>\n<th>Librairie</th>\n<th>R\u00f4le</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td><code>numpy</code></td>\n<td>Calcul num\u00e9rique, tableaux multidimensionnels</td>\n</tr>\n<tr>\n<td>2</td>\n<td><code>pandas</code></td>\n<td>Manipulation de donn\u00e9es tabulaires</td>\n</tr>\n<tr>\n<td>3</td>\n<td><code>polars</code></td>\n<td>Alternative rapide \u00e0 pandas (lazy evaluation)</td>\n</tr>\n<tr>\n<td>4</td>\n<td><code>seaborn</code> / <code>matplotlib</code></td>\n<td>Visualisation statistique</td>\n</tr>\n<tr>\n<td>5</td>\n<td><code>statsmodels</code></td>\n<td>Mod\u00e9lisation statistique avanc\u00e9e</td>\n</tr>\n<tr>\n<td>6</td>\n<td><code>scikit-learn</code></td>\n<td>Machine learning</td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "aqbW",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"0-imports\">0 \u00b7 Imports</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TRpd",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "TXez",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"1-numpy-calcul-numerique\">1 \u00b7 NumPy \u2014 Calcul Num\u00e9rique</h2>\n<span class=\"paragraph\">NumPy est la brique de base de tout l'\u00e9cosyst\u00e8me scientifique Python.\nIl fournit le type <code>ndarray</code> \u2014 un tableau multidimensionnel <strong>typ\u00e9 et continu en m\u00e9moire</strong>,\nbeaucoup plus rapide qu'une liste Python pour les op\u00e9rations num\u00e9riques.</span>\n<h3 id=\"concepts-cles\">Concepts cl\u00e9s</h3>\n<table>\n<thead>\n<tr>\n<th>Concept</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>ndarray</code></td>\n<td>Tableau N-dimensionnel homog\u00e8ne</td>\n</tr>\n<tr>\n<td><code>dtype</code></td>\n<td>Type des \u00e9l\u00e9ments (<code>float64</code>, <code>int32</code>\u2026)</td>\n</tr>\n<tr>\n<td>Broadcasting</td>\n<td>Op\u00e9rations entre tableaux de formes diff\u00e9rentes</td>\n</tr>\n<tr>\n<td>Vectorisation</td>\n<td>Appliquer une op\u00e9ration \u00e0 tout un tableau sans boucle</td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "dNNg",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "yCnT",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "wlCL",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "kqZH",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"2-pandas-manipulation-de-donnees-tabulaires\">2 \u00b7 Pandas \u2014 Manipulation de Donn\u00e9es Tabulaires</h2>\n<span class=\"paragraph\">Pandas est la librairie de r\u00e9f\u00e9rence pour manipuler des <strong>donn\u00e9es tabulaires</strong> en Python.\nSes deux structures centrales sont :</span>\n<ul>\n<li><strong><code>Series</code></strong> : tableau 1D index\u00e9 (colonne)</li>\n<li><strong><code>DataFrame</code></strong> : tableau 2D (lignes \u00d7 colonnes), analogue \u00e0 une feuille Excel ou une table SQL</li>\n</ul>\n<h3 id=\"operations-fondamentales\">Op\u00e9rations fondamentales</h3>\n<table>\n<thead>\n<tr>\n<th>Op\u00e9ration</th>\n<th>M\u00e9thode</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Exploration</td>\n<td><code>.head()</code>, <code>.info()</code>, <code>.describe()</code></td>\n</tr>\n<tr>\n<td>S\u00e9lection</td>\n<td><code>df[\"col\"]</code>, <code>df.loc[]</code>, <code>df.iloc[]</code></td>\n</tr>\n<tr>\n<td>Filtrage</td>\n<td><code>df[condition]</code></td>\n</tr>\n<tr>\n<td>Agr\u00e9gation</td>\n<td><code>.groupby().agg()</code></td>\n</tr>\n<tr>\n<td>Gestion NA</td>\n<td><code>.isnull()</code>, <code>.fillna()</code>, <code>.dropna()</code></td>\n</tr>\n<tr>\n<td>Fusion</td>\n<td><code>pd.merge()</code>, <code>pd.concat()</code></td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "wAgl",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "rEll",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "dGlV",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "SdmI",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "lgWD",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"3-polars-la-nouvelle-generation-de-dataframes\">3 \u00b7 Polars \u2014 La Nouvelle G\u00e9n\u00e9ration de DataFrames</h2>\n<span class=\"paragraph\">Polars est une alternative <strong>tr\u00e8s rapide</strong> \u00e0 pandas, \u00e9crite en Rust.\nSes atouts principaux :</span>\n<ul>\n<li><strong>Lazy evaluation</strong> : les op\u00e9rations sont optimis\u00e9es avant ex\u00e9cution</li>\n<li><strong>Multi-threading</strong> : parall\u00e9lisation automatique sur tous les c\u0153urs</li>\n<li><strong>Expressif</strong> : API chainable et coh\u00e9rente (pas d'index implicite)</li>\n</ul>\n<h3 id=\"pandas-vs-polars-syntaxe-comparee\">Pandas vs Polars \u2014 Syntaxe compar\u00e9e</h3>\n<table>\n<thead>\n<tr>\n<th>Op\u00e9ration</th>\n<th>Pandas</th>\n<th>Polars</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Filtrage</td>\n<td><code>df[df[\"col\"] &gt; 5]</code></td>\n<td><code>df.filter(pl.col(\"col\") &gt; 5)</code></td>\n</tr>\n<tr>\n<td>Nouvelle colonne</td>\n<td><code>df[\"new\"] = ...</code></td>\n<td><code>df.with_columns(...)</code></td>\n</tr>\n<tr>\n<td>Agr\u00e9gation</td>\n<td><code>df.groupby().agg()</code></td>\n<td><code>df.group_by().agg()</code></td>\n</tr>\n<tr>\n<td>Lazy mode</td>\n<td>\u2717</td>\n<td><code>df.lazy().collect()</code></td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "yOPj",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "fwwy",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "LJZf",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "urSm",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"4-seaborn-matplotlib-visualisation-statistique\">4 \u00b7 Seaborn &amp; Matplotlib \u2014 Visualisation Statistique</h2>\n<span class=\"paragraph\"><strong>Matplotlib</strong> est la librairie de visualisation bas niveau de Python.\n<strong>Seaborn</strong> s'appuie dessus pour fournir des graphiques statistiques de haute qualit\u00e9\navec beaucoup moins de code.</span>\n<h3 id=\"quand-utiliser-quoi\">Quand utiliser quoi ?</h3>\n<table>\n<thead>\n<tr>\n<th>Besoin</th>\n<th>Outil</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Graphique statistique standard</td>\n<td><code>seaborn</code></td>\n</tr>\n<tr>\n<td>Personnalisation fine</td>\n<td><code>matplotlib</code></td>\n</tr>\n<tr>\n<td>Graphique interactif</td>\n<td><code>plotly</code></td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"principaux-graphiques-seaborn\">Principaux graphiques seaborn</h3>\n<table>\n<thead>\n<tr>\n<th>Graphique</th>\n<th>Fonction</th>\n<th>Objectif</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Distribution</td>\n<td><code>histplot</code>, <code>kdeplot</code></td>\n<td>Une variable num\u00e9rique</td>\n</tr>\n<tr>\n<td>Comparaison</td>\n<td><code>boxplot</code>, <code>violinplot</code></td>\n<td>Num\u00e9rique \u00d7 Cat\u00e9gorielle</td>\n</tr>\n<tr>\n<td>Relation</td>\n<td><code>scatterplot</code>, <code>regplot</code></td>\n<td>Deux num\u00e9riques</td>\n</tr>\n<tr>\n<td>Corr\u00e9lation</td>\n<td><code>heatmap</code></td>\n<td>Matrice de corr\u00e9lation</td>\n</tr>\n<tr>\n<td>Multivari\u00e9</td>\n<td><code>pairplot</code></td>\n<td>Toutes les paires</td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "jxvo",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "mWxS",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "CcZR",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "YWSi",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"5-statsmodels-modelisation-statistique\">5 \u00b7 Statsmodels \u2014 Mod\u00e9lisation Statistique</h2>\n<span class=\"paragraph\">Statsmodels est la librairie de r\u00e9f\u00e9rence pour la <strong>mod\u00e9lisation statistique inf\u00e9rentielle</strong> en Python.\nElle fournit des r\u00e9sum\u00e9s d\u00e9taill\u00e9s (coefficients, p-values, IC, tests de diagnostic)\nproches des standards acad\u00e9miques (R, Stata).</span>\n<h3 id=\"deux-api-disponibles\">Deux API disponibles</h3>\n<table>\n<thead>\n<tr>\n<th>API</th>\n<th>Syntaxe</th>\n<th>Avantage</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Formule R</td>\n<td><code>smf.ols(\"y ~ x1 + x2\", data=df)</code></td>\n<td>Lisible, proche R</td>\n</tr>\n<tr>\n<td>Matrices</td>\n<td><code>sm.OLS(y, sm.add_constant(X))</code></td>\n<td>Contr\u00f4le total</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"modeles-disponibles\">Mod\u00e8les disponibles</h3>\n<span class=\"paragraph\"><code>OLS</code> (r\u00e9gression lin\u00e9aire), <code>Logit</code> / <code>Probit</code> (classification),\n<code>GLM</code> (mod\u00e8les g\u00e9n\u00e9ralis\u00e9s), <code>ARIMA</code> (s\u00e9ries temporelles), et bien d'autres.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "zlud",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "tZnO",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "xvXZ",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "CLip",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"6-scikit-learn-machine-learning\">6 \u00b7 Scikit-learn \u2014 Machine Learning</h2>\n<span class=\"paragraph\">Scikit-learn est la librairie de machine learning la plus utilis\u00e9e en Python.\nElle propose une <strong>API unifi\u00e9e</strong> pour tous les mod\u00e8les :</span>\n<div class=\"language-python codehilite\"><pre><span></span><code><span class=\"n\">model</span> <span class=\"o\">=</span> <span class=\"n\">MonModele</span><span class=\"p\">(</span><span class=\"n\">hyperparam\u00e8tres</span><span class=\"p\">)</span>   <span class=\"c1\"># 1. Instancier</span>\n<span class=\"n\">model</span><span class=\"o\">.</span><span class=\"n\">fit</span><span class=\"p\">(</span><span class=\"n\">X_train</span><span class=\"p\">,</span> <span class=\"n\">y_train</span><span class=\"p\">)</span>          <span class=\"c1\"># 2. Entra\u00eener</span>\n<span class=\"n\">y_pred</span> <span class=\"o\">=</span> <span class=\"n\">model</span><span class=\"o\">.</span><span class=\"n\">predict</span><span class=\"p\">(</span><span class=\"n\">X_test</span><span class=\"p\">)</span>       <span class=\"c1\"># 3. Pr\u00e9dire</span>\n<span class=\"n\">score</span>  <span class=\"o\">=</span> <span class=\"n\">model</span><span class=\"o\">.</span><span class=\"n\">score</span><span class=\"p\">(</span><span class=\"n\">X_test</span><span class=\"p\">,</span> <span class=\"n\">y_test</span><span class=\"p\">)</span> <span class=\"c1\"># 4. \u00c9valuer</span>\n</code></pre></div>\n<h3 id=\"pipeline-typique\">Pipeline typique</h3>\n<div class=\"language-scdoc codehilite\"><pre><span></span><code>Donn\u00e9es brutes\n    \u2192 Pr\u00e9traitement (StandardScaler, LabelEncoder, OneHotEncoder)\n    \u2192 S\u00e9paration train/test (train_test_split)\n    \u2192 Entra\u00eenement (fit)\n    \u2192 \u00c9valuation (score, MSE, R\u00b2, classification_report)\n</code></pre></div></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "YECM",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "cEAS",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "iXej",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "EJmg",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "UmEG",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"recapitulatif-quelle-librairie-pour-quel-besoin\">R\u00e9capitulatif \u2014 Quelle librairie pour quel besoin ?</h2>\n<table>\n<thead>\n<tr>\n<th>Besoin</th>\n<th>Librairie</th>\n<th>Fonction cl\u00e9</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Calcul num\u00e9rique rapide</td>\n<td><code>numpy</code></td>\n<td><code>np.array</code>, <code>np.mean</code>, <code>np.percentile</code></td>\n</tr>\n<tr>\n<td>Manipulation tabulaire</td>\n<td><code>pandas</code></td>\n<td><code>df.groupby().agg()</code>, <code>df.merge()</code></td>\n</tr>\n<tr>\n<td>Traitement haute performance</td>\n<td><code>polars</code></td>\n<td><code>df.lazy().filter().collect()</code></td>\n</tr>\n<tr>\n<td>Visualisation statistique</td>\n<td><code>seaborn</code></td>\n<td><code>histplot</code>, <code>boxplot</code>, <code>regplot</code></td>\n</tr>\n<tr>\n<td>Inf\u00e9rence statistique</td>\n<td><code>statsmodels</code></td>\n<td><code>smf.ols().fit().summary()</code></td>\n</tr>\n<tr>\n<td>Machine learning</td>\n<td><code>scikit-learn</code></td>\n<td><code>fit()</code>, <code>predict()</code>, <code>score()</code></td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"chaine-de-traitement-typique\">Cha\u00eene de traitement typique</h3>\n<div class=\"language-text codehilite\"><pre><span></span><code>pandas/polars       \u2192 Charger, nettoyer, explorer\nnumpy               \u2192 Calculs num\u00e9riques interm\u00e9diaires\nseaborn/matplotlib  \u2192 Visualiser et comprendre\nstatsmodels         \u2192 Tester des hypoth\u00e8ses, r\u00e9gresser avec inf\u00e9rence\nscikit-learn        \u2192 Mod\u00e9liser, pr\u00e9dire, \u00e9valuer\n</code></pre></div>\n<h3 id=\"references\">R\u00e9f\u00e9rences</h3>\n<ul>\n<li>NumPy : <a href=\"https://numpy.org/doc/stable/user/quickstart.html\" rel=\"noopener noreferrer\" target=\"_blank\">https://numpy.org/doc/stable/user/quickstart.html</a></li>\n<li>Pandas : <a href=\"https://pandas.pydata.org/docs/user_guide/index.html\" rel=\"noopener noreferrer\" target=\"_blank\">https://pandas.pydata.org/docs/user_guide/index.html</a></li>\n<li>Polars : <a href=\"https://docs.pola.rs/user-guide/\" rel=\"noopener noreferrer\" target=\"_blank\">https://docs.pola.rs/user-guide/</a></li>\n<li>Seaborn : <a href=\"https://seaborn.pydata.org/tutorial.html\" rel=\"noopener noreferrer\" target=\"_blank\">https://seaborn.pydata.org/tutorial.html</a></li>\n<li>Statsmodels : <a href=\"https://www.statsmodels.org/stable/index.html\" rel=\"noopener noreferrer\" target=\"_blank\">https://www.statsmodels.org/stable/index.html</a></li>\n<li>Scikit-learn : <a href=\"https://scikit-learn.org/stable/user_guide.html\" rel=\"noopener noreferrer\" target=\"_blank\">https://scikit-learn.org/stable/user_guide.html</a></li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

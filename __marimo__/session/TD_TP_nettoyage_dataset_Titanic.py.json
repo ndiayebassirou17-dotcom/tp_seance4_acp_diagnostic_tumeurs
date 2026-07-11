@@ -1,0 +1,230 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.23.9",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "b53324aaf16101f61aabae94902d12e2",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "12acfe07fdc9e61e6a85c048746fc319",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"seance-2-collecte-nettoyage-preparation-des-donnees\">S\u00e9ance 2 \u2014 Collecte, nettoyage, pr\u00e9paration des donn\u00e9es</h1>\n<h2 id=\"tdtp-dataset-titanic-titanic3-1309-passagers-14-colonnes\">TD/TP \u2014 Dataset Titanic (titanic3, 1309 passagers, 14 colonnes)</h2>\n<span class=\"paragraph\">Vous \u00eates data analyst pour une compagnie maritime. Mission : nettoyer et pr\u00e9parer\nles donn\u00e9es pour analyser les chances de survie du naufrage du RMS Titanic.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "36107cdce231ea0b44507dcc64f2d940",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "3dcfd136cf264c91ad4fa4b55fd425fd",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"exercice-1-audit-du-dataset\">Exercice 1 \u2014 Audit du dataset</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "b45bbc67bbf2dc7b16707e2b758e2823",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "e4179bb371d581f314d9a15794aab151",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "857ae239d35c6d2ddd92036ac4b204a6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><em>R\u00e9ponse 'body' pr\u00e9sente le taux de manquants le plus \u00e9lev\u00e9 (~90%).\nC'est logique : cette colonne n'a de sens que pour les passagers d\u00e9c\u00e9d\u00e9s\n</em><em>dont le corps a \u00e9t\u00e9 rep\u00each\u00e9 et identifi\u00e9</em>*. La grande majorit\u00e9 des passagers\n(survivants + corps jamais retrouv\u00e9s) n'ont donc structurellement aucune valeur\npossible ici \u2014 ce n'est pas un d\u00e9faut de collecte, c'est la nature de la variable.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "93c89ad79215f7ba494ca9cf260076db",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "e77f73aec8e94c71fb7f4ae671bb5c82",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Incoh\u00e9rences de types observ\u00e9es :</strong></span>\n<ul>\n<li>'body' est stock\u00e9 en 'float64' alors que c'est un identifiant entier\n  (num\u00e9ro de corps). Pandas force le passage en float d\u00e8s qu'une colonne\n  num\u00e9rique contient des 'NaN'.</li>\n<li>'pclass', 'sibsp', 'parch', 'survived' sont des entiers mais ont en r\u00e9alit\u00e9\n  un statut cat\u00e9goriel/ordinal ('pclass') ou binaire ('survived').</li>\n<li>'cabin' et 'ticket' sont des cha\u00eenes alphanum\u00e9riques qui m\u00e9langent lettres\n  et chiffres (ex: 'C85', 'PC 17599') \u2014 \u00e0 parser si on veut en extraire de\n  l'information (lettre de pont, pr\u00e9fixe de billet).</li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "bac3a5fe2a490abb28100389a2a69ad3",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "1399733d426f9ef9d82f93951720f96a",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "f3f5f68e44445ec742840808ee7ba0fc",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"exercice-2-mecanismes-de-donnees-manquantes\">Exercice 2 \u2014 M\u00e9canismes de donn\u00e9es manquantes</h2>\n<table>\n<thead>\n<tr>\n<th>Colonne</th>\n<th>% Manquants</th>\n<th>M\u00e9canisme</th>\n<th>Justification</th>\n<th>Strat\u00e9gie</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>'age'</td>\n<td>~20%</td>\n<td><strong>MAR</strong></td>\n<td>D\u00e9pend de variables observ\u00e9es ('pclass', 'sex') \u2014 les passagers de 3\u1d49 classe sont moins souvent document\u00e9s</td>\n<td>Imputation par m\u00e9diane group\u00e9e (pclass \u00d7 sex)</td>\n</tr>\n<tr>\n<td>'cabin'</td>\n<td>~77%</td>\n<td><strong>MAR</strong> (proche MNAR)</td>\n<td>D\u00e9pend fortement de 'pclass' (3\u1d49 classe = pas de cabine attribu\u00e9e/enregistr\u00e9e)</td>\n<td>Ne pas imputer une valeur \u2014 cr\u00e9er 'has_cabin'</td>\n</tr>\n<tr>\n<td>'embarked'</td>\n<td>&lt;1%</td>\n<td><strong>MCAR</strong></td>\n<td>2 valeurs manquantes, aucune logique apparente, simple oubli administratif</td>\n<td>Imputation par le mode</td>\n</tr>\n<tr>\n<td>'fare'</td>\n<td>&lt;1%</td>\n<td><strong>MCAR</strong></td>\n<td>1 seule valeur manquante, cas isol\u00e9</td>\n<td>Imputation par m\u00e9diane (id\u00e9alement par pclass)</td>\n</tr>\n<tr>\n<td>'boat'</td>\n<td>~63%</td>\n<td><strong>MNAR</strong></td>\n<td>Le manque d\u00e9pend directement de la variable cible : pas de canot \u2248 n'a pas surv\u00e9cu</td>\n<td>Ne pas imputer \u2014 cr\u00e9er 'has_boat'</td>\n</tr>\n<tr>\n<td>'body'</td>\n<td>~90%</td>\n<td><strong>MNAR</strong></td>\n<td>D\u00e9pend de 'survived' ET du fait que le corps ait \u00e9t\u00e9 rep\u00each\u00e9 (deux facteurs non observ\u00e9s)</td>\n<td>Ne pas imputer \u2014 cr\u00e9er 'body_recovered'</td>\n</tr>\n</tbody>\n</table>\n<span class=\"paragraph\"><strong>Point cl\u00e9 pour 'boat' et 'body' :</strong> ce ne sont pas de \"vraies\" donn\u00e9es manquantes\nau hasard \u2014 leur absence <strong>encode de l'information sur 'survived'</strong>. Les utiliser\ntelles quelles comme features dans un mod\u00e8le de survie cr\u00e9erait une <strong>fuite de\ndonn\u00e9es (data leakage)</strong> massive.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "111f1883b5c25ea548d23217e68b1201",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"exercice-3-comparer-deux-strategies-de-nettoyage\">Exercice 3 \u2014 Comparer deux strat\u00e9gies de nettoyage</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "0110058ff449cb9cfc9a46ad93da66e3",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": "ea158d7834de27bc752b091ace697067",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "cdb38b7abb7bcb5a33bd4fa43bc139d0",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "2814f477f1a8d071e6f78e49a371eacf",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "a7f9a06185e003a32d0eeaaf3a110c20",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Comparaison et biais :</strong></span>\n<span class=\"paragraph\">La strat\u00e9gie A perd environ 20% des lignes (essentiellement \u00e0 cause de 'age').\n<strong>Oui, A introduit un biais.</strong> Les valeurs manquantes de 'age' ne sont pas\nal\u00e9atoires (MAR, li\u00e9es \u00e0 'pclass') : elles sont plus fr\u00e9quentes en 3\u1d49 classe,\nqui a aussi un taux de survie plus faible. En supprimant ces lignes, on\n<strong>sur-repr\u00e9sente m\u00e9caniquement les 1\u02b3\u1d49 et 2\u1d49 classes</strong>, donc le taux de survie\ncalcul\u00e9 sur A est artificiellement <strong>plus \u00e9lev\u00e9</strong> que la r\u00e9alit\u00e9 globale \u2014 un\nbiais de s\u00e9lection classique. La strat\u00e9gie B, en imputant intelligemment,\nconserve toute la population et donne une estimation plus fid\u00e8le.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TqIu",
+      "code_hash": "75620f387b7a9c817a03c17495297f34",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"exercice-4-detection-et-traitement-des-outliers-fare\">Exercice 4 \u2014 D\u00e9tection et traitement des outliers ('fare')</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Vxnm",
+      "code_hash": "6867ee8ef30bb9faec568988ee140d9d",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "DnEU",
+      "code_hash": "9313aadedd555cc6e01e4a50d121f26e",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ulZA",
+      "code_hash": "296ab6a551c72a0ab66662606fde3565",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ecfG",
+      "code_hash": "62d95b220806a8959f13626e2afe1ee6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"exercice-5-discussion\">Exercice 5 \u2014 Discussion</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Pvdt",
+      "code_hash": "66e25d175aaf7b9762b8bfc420f68b07",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>1. 'body' : MCAR, MAR ou MNAR ?</strong></span>\n<span class=\"paragraph\"><strong>MNAR.</strong> 'body' n'est observ\u00e9 que pour les passagers d\u00e9c\u00e9d\u00e9s <em>et</em> dont le corps\na \u00e9t\u00e9 rep\u00each\u00e9 et identifi\u00e9. Son absence d\u00e9pend donc directement de 'survived'\n(la variable cible) et d'un second facteur non observ\u00e9 (le corps a-t-il \u00e9t\u00e9\nretrouv\u00e9). On ne peut pas \"tester\" ce m\u00e9canisme avec les donn\u00e9es observ\u00e9es \u2014\nc'est la d\u00e9finition m\u00eame de MNAR.</span>\n<span class=\"paragraph\"><strong>2. Biais introduit en supprimant les passagers sans 'cabin' (vs 'pclass') ?</strong></span>\n<span class=\"paragraph\">'cabin' est renseign\u00e9 presque uniquement en 1\u02b3\u1d49 classe (et un peu en 2\u1d49).\nSupprimer les lignes sans cabine reviendrait \u00e0 <strong>\u00e9liminer presque toute la\n3\u1d49 classe</strong>, faussant gravement toute analyse liant classe sociale et survie \u2014\nun biais de s\u00e9lection encore plus fort que pour 'age'.</span>\n<span class=\"paragraph\"><strong>3. Faut-il garder 'boat', 'body', 'ticket', 'name' pour un mod\u00e8le pr\u00e9dictif ?</strong></span>\n<ul>\n<li>'boat' et 'body': <strong>non</strong>, \u00e0 exclure absolument \u2014 fuite de donn\u00e9es, car leur\n  valeur n'est connue qu'<em>apr\u00e8s</em> le naufrage et encode quasi-directement 'survived'.</li>\n<li>'ticket' et 'name' : la colonne brute a peu de valeur pr\u00e9dictive directe, mais\n  on peut en <strong>extraire des features utiles</strong> : le titre dans 'name'\n  (Mr/Mrs/Miss/Master, corr\u00e9l\u00e9 \u00e0 l'\u00e2ge et au statut marital) et la taille du\n  groupe partageant le m\u00eame 'ticket' (proxy de voyage en famille). Garder la\n  colonne brute = inutile ; garder les features d\u00e9riv\u00e9es = pertinent.</li>\n</ul>\n<span class=\"paragraph\"><strong>4. M\u00e9diane globale vs m\u00e9diane par pclass+sex pour 'age' ?</strong></span>\n<span class=\"paragraph\">La m\u00e9diane globale \u00e9crase les diff\u00e9rences r\u00e9elles entre groupes : la 1\u02b3\u1d49 classe\ncomptait des passagers globalement plus \u00e2g\u00e9s et plus de femmes au foyer, la\n3\u1d49 classe plus de jeunes hommes immigrants. Imputer par groupe <strong>pr\u00e9serve la\nstructure et la variance r\u00e9elle</strong> des donn\u00e9es, alors que l'imputation globale\ncomprime artificiellement la distribution vers une seule valeur centrale,\natt\u00e9nuant les \u00e9carts entre classes \u2014 ce qui peut affaiblir le pouvoir pr\u00e9dictif\nd''age' dans un mod\u00e8le final.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

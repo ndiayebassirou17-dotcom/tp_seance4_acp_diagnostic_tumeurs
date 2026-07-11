@@ -1,0 +1,496 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.23.9",
+    "script_metadata_hash": "5d5a5160cb914770d66384ca48812ffc"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "52c7138d83fca3f51a9bc52a11b8afa7",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"quiz-seances-1-0-1-1\">\ud83d\udcdd Quiz \u2014 S\u00e9ances 1-0 &amp; 1-1</h1>\n<span class=\"paragraph\"><strong>Institut Polytechnique de Saint-Louis (IPSL) \u00b7 Analyse de Donn\u00e9es 2025-2026</strong></span>\n<hr />\n<span class=\"paragraph\">Ce quiz couvre les deux premi\u00e8res s\u00e9ances du cours :</span>\n<ul>\n<li><strong>S\u00e9ance 1-0</strong> : Introduction \u00e0 l'analyse de donn\u00e9es (CRISP-DM, taxonomie, pandas, \u00e9thique\u2026)</li>\n<li><strong>S\u00e9ance 1-1</strong> : Marimo, bases Python, NumPy, pandas, polars, scikit-learn</li>\n</ul>\n<span class=\"paragraph\">\u23f1\ufe0f <strong>Dur\u00e9e estim\u00e9e : 10 \u00e0 15 minutes</strong> \u00b7 15 questions</span>\n<blockquote>\n<span class=\"paragraph\">S\u00e9lectionne une r\u00e9ponse par question, puis clique sur <strong>Voir mes r\u00e9sultats</strong> en bas.</span>\n</blockquote></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "7e2cd9df265a39670af3f1868868384d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h3 id=\"partie-1-seance-1-0-introduction-a-lanalyse-de-donnees\">\ud83d\udd35 PARTIE 1 \u2014 S\u00e9ance 1-0 : Introduction \u00e0 l'Analyse de Donn\u00e9es</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "42f496c8d4f8bade6b98d2e20439637a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Question 1.</strong> Quelle est la diff\u00e9rence principale entre l'<em>analyse de donn\u00e9es</em> et la <em>science des donn\u00e9es</em> ?</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "594123a851c27edfc5fce0a47a9fbebd",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='lEQa-0' random-id='05211a8e-3882-b144-4079-a2b2d348596b'><marimo-radio data-initial-value='null' data-label='null' data-options='[&quot;A. L&#x27;analyse de donn\u00e9es utilise Python, la science des donn\u00e9es utilise R&quot;,&quot;B. L&#x27;analyse r\u00e9pond \u00e0 \u00ab que s&#x27;est-il pass\u00e9 ? \u00bb ; la science des donn\u00e9es construit des mod\u00e8les pr\u00e9dictifs&quot;,&quot;C. Ce sont deux noms diff\u00e9rents pour la m\u00eame discipline&quot;,&quot;D. La science des donn\u00e9es ne n\u00e9cessite pas de programmation&quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "8d74149e9ab078e0dbf411adf8a938bf",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Question 2.</strong> Dans le <em>continuum analytique</em>, quelle approche r\u00e9pond \u00e0 la question \u00ab Que faut-il faire ? \u00bb ?</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "6b961954378be42793d315f74dbbbcc0",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='Xref-0' random-id='b0ae2d67-8da5-3cab-c74f-5df4b6d6b20c'><marimo-radio data-initial-value='null' data-label='null' data-options='[&quot;A. Descriptive&quot;,&quot;B. Diagnostique&quot;,&quot;C. Pr\u00e9dictive&quot;,&quot;D. Prescriptive&quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "0bced6e558f905d774edd7439f172f25",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Question 3.</strong> Le <em>niveau d'\u00e9tudes</em> (L1 &lt; L2 &lt; M1 &lt; M2) est une variable de type :</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "1609c9449cb1a2004d13585c6ed716eb",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='BYtC-0' random-id='deb9dff9-b37d-4d86-cdd0-a91c8ff8f9d2'><marimo-radio data-initial-value='null' data-label='null' data-options='[&quot;A. Quantitative continue&quot;,&quot;B. Qualitative nominale&quot;,&quot;C. Qualitative ordinale&quot;,&quot;D. Quantitative discr\u00e8te&quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "77b8911db6a2301abfc00a9b7847753d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Question 4.</strong> Quelle est la <strong>premi\u00e8re</strong> phase du cycle CRISP-DM ?</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "56ae45600cb8aaba4bb7fb4c584d747d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='Kclp-0' random-id='f88234d2-4a8e-6c6f-9603-1324316531c1'><marimo-radio data-initial-value='null' data-label='null' data-options='[&quot;A. Collecte des donn\u00e9es&quot;,&quot;B. Mod\u00e9lisation&quot;,&quot;C. Compr\u00e9hension m\u00e9tier&quot;,&quot;D. D\u00e9ploiement&quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "73cdc5810329ec3f24d55071916a9271",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Question 5.</strong> Quel est le principal avantage du format <strong>Parquet</strong> par rapport au <strong>CSV</strong> ?</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "9198a2c659dad1daf89dbcb2f0868858",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='Hstk-0' random-id='153f15bb-279d-1c41-8098-319e0e6c8a0d'><marimo-radio data-initial-value='null' data-label='null' data-options='[&quot;A. Parquet est un format texte lisible par l&#x27;humain&quot;,&quot;B. Parquet est colonnaire : lecture s\u00e9lective, 5-10\u00d7 moins d&#x27;espace, tr\u00e8s rapide&quot;,&quot;C. Parquet est plus simple \u00e0 cr\u00e9er qu&#x27;un CSV&quot;,&quot;D. Parquet est le seul format compatible avec pandas&quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "6d4f3285d43535d6b82700b225ee3724",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Question 6.</strong> L'exemple de <em>Google Flu Trends</em> illustre principalement quel pi\u00e8ge ?</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": "3f16c6c9fb3483f4d1c0828f0ee91628",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='iLit-0' random-id='4a585653-4506-ac10-93e7-cc74c36fb0db'><marimo-radio data-initial-value='null' data-label='null' data-options='[&quot;A. Les mod\u00e8les pr\u00e9dictifs sont toujours fiables sur le long terme&quot;,&quot;B. La corr\u00e9lation implique la causalit\u00e9 si \u03c1 &#92;u003e 0.8&quot;,&quot;C. Corr\u00e9lation \u2260 causalit\u00e9 : les recherches \u00ab flu \u00bb sont un effet de la grippe, pas sa cause&quot;,&quot;D. Le Big Data r\u00e9sout automatiquement les biais dans les donn\u00e9es&quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "2fa6602f94c50c595a242f16b7989995",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Question 7.</strong> Que retourne <code>df.shape</code> sur un DataFrame pandas de 1 309 lignes et 14 colonnes ?</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "97a40173e196a11c2a0682e76e731163",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='ROlb-0' random-id='8f730d9e-86a3-ea59-a05b-331af51eae28'><marimo-radio data-initial-value='null' data-label='null' data-options='[&quot;A. `[1309, 14]`&quot;,&quot;B. `(1309, 14)`&quot;,&quot;C. `{&#x27;rows&#x27;: 1309, &#x27;cols&#x27;: 14}`&quot;,&quot;D. `1309`&quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "d725271331c92752f136a4b96cebf0bf",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Question 8.</strong> Dans le dataset Titanic, la colonne <code>Pclass</code> (valeurs 1, 2, 3) est :</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TqIu",
+      "code_hash": "da5f6ccfbcb7f8f7c1730273974658ee",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='TqIu-0' random-id='927ecba4-d9c1-2798-fa67-8253b2fa4186'><marimo-radio data-initial-value='null' data-label='null' data-options='[&quot;A. Quantitative continue, car ses valeurs sont des nombres&quot;,&quot;B. Quantitative discr\u00e8te uniquement&quot;,&quot;C. Qualitative ordinale : l&#x27;ordre des classes a du sens (1\u00e8re &#92;u003e 2\u00e8me &#92;u003e 3\u00e8me)&quot;,&quot;D. Qualitative nominale car les num\u00e9ros sont arbitraires&quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Vxnm",
+      "code_hash": "0abda51097947a19a7a1a82ad43605f4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h3 id=\"partie-2-seance-1-1-python-librairies\">\ud83d\udfe2 PARTIE 2 \u2014 S\u00e9ance 1-1 : Python &amp; Librairies</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "DnEU",
+      "code_hash": "0427f9e21d3d90ea3ebee83880b4c76c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Question 9.</strong> Dans <strong>marimo</strong>, pourquoi une variable ne peut-elle \u00eatre d\u00e9finie que dans <strong>une seule cellule</strong> ?</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ulZA",
+      "code_hash": "d1f2c2063b90b9efae10d33456c9b657",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='ulZA-0' random-id='19912f8f-19d6-bc08-ff90-a4769787e0e9'><marimo-radio data-initial-value='null' data-label='null' data-options='[&quot;A. C&#x27;est une limitation technique de Python 3.13&quot;,&quot;B. Marimo construit un graphe de d\u00e9pendances (DAG) ; plusieurs d\u00e9finitions cr\u00e9ent une ambigu\u00eft\u00e9&quot;,&quot;C. Pour \u00e9conomiser la m\u00e9moire RAM&quot;,&quot;D. Pour \u00eatre compatible avec Jupyter&quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ecfG",
+      "code_hash": "1259331f6be9994f58231a93f0911479",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Question 10.</strong> Quel est le r\u00e9sultat de ce code Python ?\n<div class=\"language-python codehilite\"><pre><span></span><code><span class=\"n\">notes</span> <span class=\"o\">=</span> <span class=\"p\">[</span><span class=\"mi\">12</span><span class=\"p\">,</span> <span class=\"mi\">15</span><span class=\"p\">,</span> <span class=\"mi\">9</span><span class=\"p\">,</span> <span class=\"mi\">18</span><span class=\"p\">]</span>\n<span class=\"n\">admis</span> <span class=\"o\">=</span> <span class=\"p\">[</span><span class=\"n\">n</span> <span class=\"k\">for</span> <span class=\"n\">n</span> <span class=\"ow\">in</span> <span class=\"n\">notes</span> <span class=\"k\">if</span> <span class=\"n\">n</span> <span class=\"o\">&gt;=</span> <span class=\"mi\">10</span><span class=\"p\">]</span>\n<span class=\"nb\">print</span><span class=\"p\">(</span><span class=\"n\">admis</span><span class=\"p\">)</span>\n</code></pre></div></span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Pvdt",
+      "code_hash": "9cb626cdc1af3a0e208645965b1d734e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='Pvdt-0' random-id='9202b5f6-4917-f338-2a69-2ab09afc7fd6'><marimo-radio data-initial-value='null' data-label='null' data-options='[&quot;A. `[9, 12, 15, 18]`&quot;,&quot;B. `[12, 15, 18]`&quot;,&quot;C. `[True, True, False, True]`&quot;,&quot;D. `[10, 12, 15, 18]`&quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZBYS",
+      "code_hash": "321f1f385ff59f27026238335f405a7a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Question 11.</strong> Quelle structure de donn\u00e9es Python est <strong>immuable</strong> (non modifiable apr\u00e8s cr\u00e9ation) ?</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "aLJB",
+      "code_hash": "d709313ed38e7fd5e8c0a17a0067638a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='aLJB-0' random-id='7e562b1c-dd34-6fe4-50a7-e33a9619077b'><marimo-radio data-initial-value='null' data-label='null' data-options='[&quot;A. `list`&quot;,&quot;B. `dict`&quot;,&quot;C. `tuple`&quot;,&quot;D. `set`&quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "nHfw",
+      "code_hash": "d1ebcc2ec3d90c0327133183a1892957",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Question 12.</strong> En <strong>NumPy</strong>, que signifie le terme <em>vectorisation</em> ?</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "xXTn",
+      "code_hash": "7df4eeea304e2f4a729f694a2689cd31",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='xXTn-0' random-id='a41660f1-d8c5-4c82-7064-61d566b2d2fe'><marimo-radio data-initial-value='null' data-label='null' data-options='[&quot;A. Convertir des donn\u00e9es texte en vecteurs num\u00e9riques&quot;,&quot;B. Appliquer une op\u00e9ration \u00e0 tout un tableau sans boucle Python, en d\u00e9l\u00e9guant \u00e0 du code C compil\u00e9&quot;,&quot;C. Dessiner des vecteurs dans un graphique matplotlib&quot;,&quot;D. Encoder des variables cat\u00e9gorielles avec `LabelEncoder`&quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "AjVT",
+      "code_hash": "5c714a4ac817bf9694f9ac485b5ff3e1",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Question 13.</strong> Quelle est la diff\u00e9rence entre <code>df.loc[]</code> et <code>df.iloc[]</code> dans pandas ?</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "pHFh",
+      "code_hash": "2c5e7e9ff2129065b450ef4df3cdc178",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='pHFh-0' random-id='d242afcb-8513-d75e-02d5-42b475b3cd84'><marimo-radio data-initial-value='null' data-label='null' data-options='[&quot;A. `loc` s\u00e9lectionne par *labels* (noms) ; `iloc` s\u00e9lectionne par *indices entiers*&quot;,&quot;B. `loc` est r\u00e9serv\u00e9 aux colonnes num\u00e9riques ; `iloc` aux colonnes texte&quot;,&quot;C. `loc` est plus rapide que `iloc` sur les grands datasets&quot;,&quot;D. Il n&#x27;y a aucune diff\u00e9rence, ils sont interchangeables&quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "NCOB",
+      "code_hash": "5d00191b767079ec8bc74e2383ea389d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Question 14.</strong> Quel est le principal avantage de <strong>Polars</strong> par rapport \u00e0 pandas pour les grands volumes ?</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "aqbW",
+      "code_hash": "d2ec1228dee49a27f8170a54a31db7cd",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='aqbW-0' random-id='720d2c00-366a-9d5c-b4c2-f8fbcad11a1b'><marimo-radio data-initial-value='null' data-label='null' data-options='[&quot;A. Polars compresse les donn\u00e9es automatiquement&quot;,&quot;B. Polars est \u00e9crit en Rust, utilise le multi-threading et l&#x27;\u00e9valuation lazy \u2014 5 \u00e0 20\u00d7 plus rapide&quot;,&quot;C. Polars est compatible avec Excel, pandas ne l&#x27;est pas&quot;,&quot;D. Polars permet de faire du ML sans scikit-learn&quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TRpd",
+      "code_hash": "4a8928a4786e49ca876f55330aa9ebab",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Question 15.</strong> Dans le pipeline <strong>scikit-learn</strong>, quel est l'ordre correct des \u00e9tapes ?</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TXez",
+      "code_hash": "9774ce5e531b92ff085a7a28766288ec",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='TXez-0' random-id='7b338c71-49f5-dd4b-5897-5b27b2f1a015'><marimo-radio data-initial-value='null' data-label='null' data-options='[&quot;A. `predict` \u2192 `fit` \u2192 `score`&quot;,&quot;B. `fit` \u2192 `predict` \u2192 `score`&quot;,&quot;C. `score` \u2192 `fit` \u2192 `predict`&quot;,&quot;D. `fit` \u2192 `score` \u2192 `predict`&quot;]' data-inline='false' data-disabled='false'></marimo-radio></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "dNNg",
+      "code_hash": "52c9ef9f69a50c4351256a730a828d5f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr /></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "yCnT",
+      "code_hash": "474e84bc6887681b8fd4040a27f1fc04",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='yCnT-0' random-id='d38c48e6-e73d-897b-4ff0-8a941b4b1eea'><marimo-button data-initial-value='0' data-label='&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003e\u2705 Voir mes r\u00e9sultats&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;' data-kind='&quot;success&quot;' data-disabled='false' data-full-width='false'></marimo-button></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "wlCL",
+      "code_hash": "cd5cef4ce3a4c89c04f15cc6fda8c40c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><marimo-callout-output data-html='&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003ch2 id=&#92;&quot;score-5-15-33&#92;&quot;&#92;u003e\ud83d\udcd6 Score : 5 / 15 (33 %)&#92;u003c/h2&#92;u003e&#92;n&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003e&#92;u003cstrong&#92;u003e\u00c0 retravailler \u2014 relis les s\u00e9ances&#92;u003c/strong&#92;u003e&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;' data-kind='&quot;warn&quot;'></marimo-callout-output><span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h3 id=\"detail-question-par-question\">\ud83d\udd0d D\u00e9tail question par question</h3>\n<span class=\"paragraph\">\u274c <strong>Q1</strong> \u2014 Ta r\u00e9ponse : <code>C</code> | Bonne r\u00e9ponse : <code>B</code></span>\n<blockquote>\n<span class=\"paragraph\">L'analyse de donn\u00e9es (descriptive/diagnostique) r\u00e9pond \u00e0 <em>ce qui s'est pass\u00e9</em>, tandis que la science des donn\u00e9es construit des mod\u00e8les pr\u00e9dictifs pour l'avenir.</span>\n</blockquote>\n<hr />\n<span class=\"paragraph\">\u274c <strong>Q2</strong> \u2014 Ta r\u00e9ponse : <code>B</code> | Bonne r\u00e9ponse : <code>D</code></span>\n<blockquote>\n<span class=\"paragraph\">L'approche <strong>prescriptive</strong> recommande des actions concr\u00e8tes \u2014 ex : envoyer une offre cibl\u00e9e pour r\u00e9duire le churn.</span>\n</blockquote>\n<hr />\n<span class=\"paragraph\">\u2705 <strong>Q3</strong> \u2014 Ta r\u00e9ponse : <code>C</code> | Bonne r\u00e9ponse : <code>C</code></span>\n<blockquote>\n<span class=\"paragraph\">Le niveau d'\u00e9tudes est <strong>ordinal</strong> : il y a un ordre logique entre les niveaux (L1 &lt; L2 &lt; M1 &lt; M2), mais l'\u00e9cart entre niveaux n'est pas uniforme.</span>\n</blockquote>\n<hr />\n<span class=\"paragraph\">\u274c <strong>Q4</strong> \u2014 Ta r\u00e9ponse : <code>A</code> | Bonne r\u00e9ponse : <code>C</code></span>\n<blockquote>\n<span class=\"paragraph\">CRISP-DM commence par la <strong>compr\u00e9hension m\u00e9tier</strong> : d\u00e9finir le probl\u00e8me, les objectifs et les crit\u00e8res de succ\u00e8s avant toute manipulation de donn\u00e9es.</span>\n</blockquote>\n<hr />\n<span class=\"paragraph\">\u2705 <strong>Q5</strong> \u2014 Ta r\u00e9ponse : <code>B</code> | Bonne r\u00e9ponse : <code>B</code></span>\n<blockquote>\n<span class=\"paragraph\">Parquet est <strong>colonnaire</strong> : il lit uniquement les colonnes demand\u00e9es (pas toutes les lignes), ce qui le rend 5\u201310\u00d7 plus compact et beaucoup plus rapide que CSV.</span>\n</blockquote>\n<hr />\n<span class=\"paragraph\">\u274c <strong>Q6</strong> \u2014 Ta r\u00e9ponse : <code>D</code> | Bonne r\u00e9ponse : <code>C</code></span>\n<blockquote>\n<span class=\"paragraph\">Google Flu Trends illustre que <strong>corr\u00e9lation \u2260 causalit\u00e9</strong> : les recherches <em>flu</em> augmentent <em>parce que</em> les gens sont malades \u2014 c'est un effet, pas une cause.</span>\n</blockquote>\n<hr />\n<span class=\"paragraph\">\u274c <strong>Q7</strong> \u2014 Ta r\u00e9ponse : <code>A</code> | Bonne r\u00e9ponse : <code>B</code></span>\n<blockquote>\n<span class=\"paragraph\"><code>df.shape</code> retourne un <strong>tuple</strong> <code>(n_lignes, n_colonnes)</code> \u2014 ici <code>(1309, 14)</code>.</span>\n</blockquote>\n<hr />\n<span class=\"paragraph\">\u274c <strong>Q8</strong> \u2014 Ta r\u00e9ponse : <code>D</code> | Bonne r\u00e9ponse : <code>C</code></span>\n<blockquote>\n<span class=\"paragraph\"><code>Pclass</code> est <strong>qualitative ordinale</strong> : les valeurs 1, 2, 3 ont un ordre significatif (1\u00e8re &gt; 2\u00e8me &gt; 3\u00e8me), mais ce ne sont pas de vraies quantit\u00e9s num\u00e9riques.</span>\n</blockquote>\n<hr />\n<span class=\"paragraph\">\u274c <strong>Q9</strong> \u2014 Ta r\u00e9ponse : <code>A</code> | Bonne r\u00e9ponse : <code>B</code></span>\n<blockquote>\n<span class=\"paragraph\">Marimo construit un <strong>DAG</strong> de d\u00e9pendances entre cellules. Si une variable est d\u00e9finie deux fois, le graphe est ambigu \u2192 erreur <code>multiple-definitions</code>.</span>\n</blockquote>\n<hr />\n<span class=\"paragraph\">\u2705 <strong>Q10</strong> \u2014 Ta r\u00e9ponse : <code>B</code> | Bonne r\u00e9ponse : <code>B</code></span>\n<blockquote>\n<span class=\"paragraph\">La compr\u00e9hension de liste filtre uniquement les notes \u2265 10 : <strong>[12, 15, 18]</strong> (9 est exclu car 9 &lt; 10).</span>\n</blockquote>\n<hr />\n<span class=\"paragraph\">\u2705 <strong>Q11</strong> \u2014 Ta r\u00e9ponse : <code>C</code> | Bonne r\u00e9ponse : <code>C</code></span>\n<blockquote>\n<span class=\"paragraph\">Le <strong>tuple</strong> <code>(1, 2, 3)</code> est immuable : on ne peut pas modifier ses \u00e9l\u00e9ments apr\u00e8s cr\u00e9ation. Les listes, dicts et sets sont mutables.</span>\n</blockquote>\n<hr />\n<span class=\"paragraph\">\u274c <strong>Q12</strong> \u2014 Ta r\u00e9ponse : <code>A</code> | Bonne r\u00e9ponse : <code>B</code></span>\n<blockquote>\n<span class=\"paragraph\">La <strong>vectorisation</strong> d\u00e9l\u00e8gue les calculs \u00e0 du code C compil\u00e9 sans boucle Python explicite \u2014 c'est pourquoi NumPy est 10\u2013100\u00d7 plus rapide pour les calculs num\u00e9riques.</span>\n</blockquote>\n<hr />\n<span class=\"paragraph\">\u274c <strong>Q13</strong> \u2014 Ta r\u00e9ponse : <code>C</code> | Bonne r\u00e9ponse : <code>A</code></span>\n<blockquote>\n<span class=\"paragraph\"><code>loc</code> s\u00e9lectionne par <strong>labels</strong> (noms d'index/colonnes) ; <code>iloc</code> s\u00e9lectionne par <strong>position enti\u00e8re</strong> (0, 1, 2\u2026).</span>\n</blockquote>\n<hr />\n<span class=\"paragraph\">\u2705 <strong>Q14</strong> \u2014 Ta r\u00e9ponse : <code>B</code> | Bonne r\u00e9ponse : <code>B</code></span>\n<blockquote>\n<span class=\"paragraph\">Polars est \u00e9crit en <strong>Rust</strong>, exploite le <strong>multi-threading</strong> et l'\u00e9valuation <strong>lazy</strong> (optimisation du plan avant ex\u00e9cution) \u2014 nativement compatible Apache Arrow.</span>\n</blockquote>\n<hr />\n<span class=\"paragraph\">\u274c <strong>Q15</strong> \u2014 Ta r\u00e9ponse : <code>A</code> | Bonne r\u00e9ponse : <code>B</code></span>\n<blockquote>\n<span class=\"paragraph\">Le pipeline sklearn suit toujours : <code>fit(X_train, y_train)</code> \u2192 <code>predict(X_test)</code> \u2192 <code>score</code> ou calcul de m\u00e9triques.</span>\n</blockquote></span></div>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "kqZH",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    }
+  ]
+}

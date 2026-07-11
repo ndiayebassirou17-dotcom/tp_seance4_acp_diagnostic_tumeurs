@@ -1,0 +1,522 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.23.9",
+    "script_metadata_hash": "1d3a824c7ac276db7b62129cf3505c55"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "4d68e4797815892ce523fa1997722130",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "71490114b396806045e7c88b62f99ee0",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"seance-1-introduction-a-lanalyse-de-donnees\">\ud83d\udcca S\u00e9ance 1 \u2014 Introduction \u00e0 l'Analyse de Donn\u00e9es</h1>\n<span class=\"paragraph\"><strong>Institut Polytechnique de Saint-Louis (IPSL) \u00b7 Ann\u00e9e 2025\u20132026</strong></span>\n<hr />\n<table>\n<thead>\n<tr>\n<th></th>\n<th></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Dur\u00e9e</strong></td>\n<td>3 heures (CM 2h + TP 1h)</td>\n</tr>\n<tr>\n<td><strong>Outils</strong></td>\n<td>Python 3.11+, pandas, polars, marimo, uv</td>\n</tr>\n<tr>\n<td><strong>Dataset TP</strong></td>\n<td>Titanic (1309 passagers \u2014 <code>datasets/raw/titanic.csv</code>)</td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "847352b89bdb091c14a59aed77dc2171",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"partie-1-cours-magistral-cm-2h\">\ud83c\udf93 PARTIE 1 \u2014 Cours Magistral (CM \u00b7 2h)</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "69720b4cb98a7737a0ded46cb17fba0d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"11-analyse-de-donnees-vs-science-des-donnees\">1.1 \u00b7 Analyse de donn\u00e9es vs Science des donn\u00e9es</h3>\n<h4 id=\"definitions-fondamentales\">D\u00e9finitions fondamentales</h4>\n<blockquote>\n<span class=\"paragraph\"><em>\u00ab Data analytics is the science of analyzing raw data to make conclusions\nabout that information. \u00bb</em>\n\u2014 <strong>Igual, L. &amp; Segu\u00ed, S. (2017). Introduction to Data Science . Springer</strong></span>\n<span class=\"paragraph\"><em>\u00ab Data science is commonly defined as a methodology by which actionable\ninsights can be inferred from data. \u00bb</em>\n\u2014 <strong>Igual, L. &amp; Segu\u00ed, S. (2017). Introduction to Data Science . Springer</strong></span>\n</blockquote>\n<span class=\"paragraph\">En pratique, l'analyse de donn\u00e9es et la science de donn\u00e9es sont deux disciplines distinctes,\nbien qu'elles se chevauchent partiellement et partagent certains outils communs.</span>\n<h4 id=\"points-importants\">Points importants</h4>\n<table>\n<thead>\n<tr>\n<th></th>\n<th><strong>Analyse de donn\u00e9es</strong> (<em>Data Analytics</em>)</th>\n<th><strong>Science des donn\u00e9es</strong> (<em>Data Science</em>)</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Objectif</strong></td>\n<td>Tirer des conclusions \u00e0 partir de donn\u00e9es existantes</td>\n<td>Extraire des connaissances et construire des mod\u00e8les pr\u00e9dictifs</td>\n</tr>\n<tr>\n<td><strong>Question(s)</strong></td>\n<td><em>Que s'est-il pass\u00e9 ? Pourquoi ?</em></td>\n<td><em>Que va-t-il se passer ? Comment l'automatiser ?</em></td>\n</tr>\n<tr>\n<td><strong>Horizon</strong></td>\n<td>Court/Moyen terme \u2014 d\u00e9cision op\u00e9rationnelle</td>\n<td>Moyen/Long terme \u2014 mod\u00e9lisation et mise en production</td>\n</tr>\n<tr>\n<td><strong>Outils typiques</strong></td>\n<td>Tableurs, SQL, Python, R, BI tools, Data Viz</td>\n<td>Python, R, scikit-learn, TensorFlow, Spark, MLflow</td>\n</tr>\n<tr>\n<td><strong>Profil</strong></td>\n<td>Data Analyst, Statisticien</td>\n<td>Data Scientist, ML Engineer</td>\n</tr>\n</tbody>\n</table>\n<h4 id=\"pourquoi-lanalyse-de-donnees-est-elle-strategique\">Pourquoi l'analyse de donn\u00e9es est-elle strat\u00e9gique ?</h4>\n<span class=\"paragraph\">L'analyse de donn\u00e9es aide une organisation \u00e0 :</span>\n<ul>\n<li><strong>optimiser ses performances</strong> et ses processus internes</li>\n<li><strong>maximiser ses profits</strong> en identifiant les leviers d'action</li>\n<li><strong>prendre des d\u00e9cisions guid\u00e9es par les faits</strong> plut\u00f4t que par l'intuition</li>\n</ul>\n<span class=\"paragraph\">Les techniques et processus d'analyse sont aujourd'hui largement <strong>automatis\u00e9s</strong>\nvia des algorithmes travaillant sur des donn\u00e9es brutes \u2014 c'est pr\u00e9cis\u00e9ment\nce que vous allez apprendre \u00e0 construire dans ce cours.</span>\n<h4 id=\"donnee-vs-information\">Donn\u00e9e vs Information</h4>\n<table>\n<thead>\n<tr>\n<th>Concept</th>\n<th>D\u00e9finition</th>\n<th>Exemple</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Donn\u00e9e</strong> (<em>data</em>)</td>\n<td>Observation brute, objective, sans contexte</td>\n<td><code>38.0</code>, <code>\"female\"</code>, <code>71.28</code></td>\n</tr>\n<tr>\n<td><strong>Information</strong></td>\n<td>Donn\u00e9e interpr\u00e9t\u00e9e par un humain, avec sens</td>\n<td><em>\u00ab Une femme adulte de 1\u02b3\u1d49 classe \u00bb</em></td>\n</tr>\n</tbody>\n</table>\n<span class=\"paragraph\">La donn\u00e9e devient information lorsqu'on lui attribue un <strong>contexte m\u00e9tier</strong>.\nLa data science automatise cette transformation \u00e0 grande \u00e9chelle.</span>\n<h4 id=\"pourquoi-maintenant-lere-du-big-data\">Pourquoi maintenant ? L'\u00e8re du Big Data</h4>\n<span class=\"paragraph\">Le succ\u00e8s de <strong>Google, Amazon, Facebook, Apple, Microsoft (GAFAM)</strong> est directement\nattribuable \u00e0 leur ma\u00eetrise de la data science, de l'IA et du Big Data.</span>\n<span class=\"paragraph\">Une organisation qui n'exploite pas ses donn\u00e9es perd en comp\u00e9titivit\u00e9 face \u00e0 celles qui le font.</span>\n<span class=\"paragraph\">Quatre conditions sont n\u00e9cessaires \u00e0 un projet data r\u00e9ussi :</span>\n<ol>\n<li>Des <strong>objectifs quantifiables</strong> clairs</li>\n<li>Une <strong>m\u00e9thodologie rigoureuse</strong> (ex. : CRISP-DM)</li>\n<li>Une <strong>\u00e9quipe interdisciplinaire</strong> (voir section 1.2b)</li>\n<li>Un <strong>workflow reproductible</strong> (code versionn\u00e9, environnements fig\u00e9s)</li>\n</ol>\n<h4 id=\"le-continuum-analytique-les-4-approches\">Le continuum analytique \u2014 les 4 approches</h4>\n<table>\n<thead>\n<tr>\n<th>Approche</th>\n<th>Question pos\u00e9e</th>\n<th>Exemple</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Descriptive</strong></td>\n<td><em>Que s'est-il pass\u00e9 ?</em></td>\n<td>Tableau de bord des ventes mensuelles</td>\n</tr>\n<tr>\n<td><strong>Diagnostique</strong></td>\n<td><em>Pourquoi cela s'est-il pass\u00e9 ?</em></td>\n<td>Analyse des causes d'une chute de CA</td>\n</tr>\n<tr>\n<td><strong>Pr\u00e9dictive</strong></td>\n<td><em>Que va-t-il se passer ?</em></td>\n<td>Pr\u00e9vision du taux de d\u00e9sabonnement</td>\n</tr>\n<tr>\n<td><strong>Prescriptive</strong></td>\n<td><em>Que faut-il faire ?</em></td>\n<td>Optimisation automatique du stock</td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<span class=\"paragraph\">\ud83d\udca1 <strong>Exemple fil rouge</strong> : Un op\u00e9rateur t\u00e9l\u00e9com analyse son churn (<em>descriptif</em>),\nidentifie les segments \u00e0 risque (<em>diagnostique</em>), pr\u00e9dit les r\u00e9siliations du mois\nprochain (<em>pr\u00e9dictif</em>) et d\u00e9cide d'envoyer une offre cibl\u00e9e (<em>prescriptif</em>).</span>\n</blockquote>\n<h4 id=\"outils-selon-le-type-danalyse\">Outils selon le type d'analyse</h4>\n<table>\n<thead>\n<tr>\n<th>Niveau</th>\n<th>Outils typiques</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Tableurs &amp; reporting</td>\n<td>Excel, Google Sheets, Power BI, Tableau</td>\n</tr>\n<tr>\n<td>Visualisation</td>\n<td>matplotlib, seaborn, Plotly, Grafana</td>\n</tr>\n<tr>\n<td>Exploration &amp; wrangling</td>\n<td>pandas, SQL, polar, dplyr (R)</td>\n</tr>\n<tr>\n<td>Mining &amp; ML</td>\n<td>scikit-learn, XGBoost, TensorFlow, PyTorch</td>\n</tr>\n<tr>\n<td>Langages open-source</td>\n<td><strong>Python</strong> \u2713, R, Julia</td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "0898e71c331c1253e02c9056507479d2",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "872c20e61cbaeb2a6a57436a81e1d827",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"12-les-4-strategies-pour-explorer-le-monde-par-les-donnees\">1.2 \u00b7 Les 4 strat\u00e9gies pour explorer le monde par les donn\u00e9es</h3>\n<span class=\"paragraph\"><strong>1. Sonder la r\u00e9alit\u00e9 (Probing reality)</strong>\nLes donn\u00e9es repr\u00e9sentent la r\u00e9ponse du monde \u00e0 nos actions.\nExemple : l'<strong>A/B testing</strong> \u2014 quelle couleur de bouton convertit le mieux ?\nLa seule r\u00e9ponse valide vient de l'exp\u00e9rimentation sur des donn\u00e9es r\u00e9elles.</span>\n<span class=\"paragraph\"><strong>2. D\u00e9couverte de patterns (Pattern discovery)</strong>\nAnalyser automatiquement des probl\u00e8mes pour d\u00e9couvrir des clusters naturels.\nExemple : <strong>profilage d'utilisateurs</strong> en marketing digital ou publicit\u00e9 programmatique.</span>\n<span class=\"paragraph\"><strong>3. Pr\u00e9diction d'\u00e9v\u00e9nements futurs (Predicting future events)</strong>\nConstruire des <strong>mod\u00e8les pr\u00e9dictifs</strong> robustes. Exemple : optimiser les plannings\ndu personnel d'un magasin en analysant m\u00e9t\u00e9o, historique des ventes, trafic.</span>\n<span class=\"paragraph\"><strong>4. Comprendre les personnes et le monde</strong>\nInvestissement en NLP, vision par ordinateur, neurosciences.\nLe deep learning pour la compr\u00e9hension du langage en est l'exemple type.</span>\n<span class=\"paragraph\">\ud83d\udccc <strong>Distinction pr\u00e9diction vs pr\u00e9vision</strong> :</span>\n<blockquote>\n<span class=\"paragraph\">\u00ab it will rain tomorrow \u00bb = pr\u00e9diction (un r\u00e9sultat unique) ;</span>\n<span class=\"paragraph\">\u00ab 40% chance of rain \u00bb = pr\u00e9vision (distribution de r\u00e9sultats possibles).</span>\n</blockquote></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "d17986ca2abf36dd08591baba5617bec",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"12b-les-roles-dans-une-equipe-data-science\">1.2b \u00b7 Les r\u00f4les dans une \u00e9quipe Data Science</h3>\n<span class=\"paragraph\">Un projet data mobilise g\u00e9n\u00e9ralement <strong>6 profils compl\u00e9mentaires</strong>.\nEn pratique, les r\u00f4les se chevauchent \u2014 le \u00ab <em>data scientist unicorn</em> \u00bb qui\nma\u00eetrise tout seul l'ensemble du cycle est exceptionnel.</span>\n<table>\n<thead>\n<tr>\n<th>R\u00f4le</th>\n<th>Responsabilit\u00e9s principales</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Chef de projet</strong></td>\n<td>Coordination, planning, communication avec les m\u00e9tiers</td>\n</tr>\n<tr>\n<td><strong>Data Architect</strong></td>\n<td>Conception de l'infrastructure et des pipelines de donn\u00e9es</td>\n</tr>\n<tr>\n<td><strong>Data Engineer</strong></td>\n<td>Construction et maintenance des pipelines ETL / ELT</td>\n</tr>\n<tr>\n<td><strong>Data Analyst</strong></td>\n<td>Exploration, dashboards, reporting, aide \u00e0 la d\u00e9cision</td>\n</tr>\n<tr>\n<td><strong>Data Scientist</strong></td>\n<td>Mod\u00e9lisation ML, exp\u00e9rimentation, feature engineering</td>\n</tr>\n<tr>\n<td><strong>ML Engineer</strong></td>\n<td>D\u00e9ploiement, monitoring et industrialisation des mod\u00e8les</td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<span class=\"paragraph\">\u26a1 Dans ce cours, vous allez progressivement couvrir les r\u00f4les\n<strong>Data Analyst</strong> (s\u00e9ances 1\u20133) et <strong>Data Scientist</strong> (s\u00e9ances 4\u20137).</span>\n</blockquote>\n<h3 id=\"12c-types-dapprentissage-automatique-machine-learning\">1.2c \u00b7 Types d'apprentissage automatique (Machine Learning)</h3>\n<span class=\"paragraph\">La d\u00e9finition de r\u00e9f\u00e9rence (Tom Mitchell, 1997) :</span>\n<blockquote>\n<span class=\"paragraph\"><em>\"A program learns from experience </em><em>E</em><em> regarding task </em><em>T</em><em> with performance\nmeasure </em><em>P</em><em>, if its performance on </em><em>T</em><em> (measured by </em><em>P</em><em>) improves with experience </em><em>E</em><em>.\"</em></span>\n</blockquote>\n<h4 id=\"apprentissage-supervise-vs-non-supervise\">Apprentissage supervis\u00e9 vs non-supervis\u00e9</h4>\n<div class=\"language-verilog codehilite\"><pre><span></span><code><span class=\"n\">Machine</span><span class=\"w\"> </span><span class=\"n\">Learning</span>\n<span class=\"err\">\u251c\u2500\u2500</span><span class=\"w\"> </span><span class=\"n\">Supervis\u00e9</span><span class=\"w\"> </span><span class=\"p\">(</span><span class=\"n\">donn\u00e9es</span><span class=\"w\"> </span><span class=\"err\">\u00e9</span><span class=\"n\">tiquet\u00e9es</span><span class=\"w\"> </span><span class=\"err\">\u2014</span><span class=\"w\"> </span><span class=\"n\">on</span><span class=\"w\"> </span><span class=\"n\">conna\u00eet</span><span class=\"w\"> </span><span class=\"n\">la</span><span class=\"w\"> </span><span class=\"n\">r\u00e9ponse</span><span class=\"p\">)</span>\n<span class=\"err\">\u2502</span><span class=\"w\">   </span><span class=\"err\">\u251c\u2500\u2500</span><span class=\"w\"> </span><span class=\"n\">R\u00e9gression</span><span class=\"w\">    </span><span class=\"err\">\u2192</span><span class=\"w\"> </span><span class=\"n\">sortie</span><span class=\"w\"> </span><span class=\"n\">num\u00e9rique</span><span class=\"w\">    </span><span class=\"nl\">ex:</span><span class=\"w\"> </span><span class=\"n\">pr\u00e9dire</span><span class=\"w\"> </span><span class=\"n\">un</span><span class=\"w\"> </span><span class=\"n\">prix</span><span class=\"p\">,</span><span class=\"w\"> </span><span class=\"n\">un</span><span class=\"w\"> </span><span class=\"n\">revenu</span>\n<span class=\"err\">\u2502</span><span class=\"w\">   </span><span class=\"err\">\u2514\u2500\u2500</span><span class=\"w\"> </span><span class=\"n\">Classification</span><span class=\"w\"> </span><span class=\"err\">\u2192</span><span class=\"w\"> </span><span class=\"n\">sortie</span><span class=\"w\"> </span><span class=\"n\">cat\u00e9gorielle</span><span class=\"w\">  </span><span class=\"nl\">ex:</span><span class=\"w\"> </span><span class=\"n\">spam</span><span class=\"o\">/</span><span class=\"n\">non</span><span class=\"o\">-</span><span class=\"n\">spam</span><span class=\"p\">,</span><span class=\"w\"> </span><span class=\"n\">churn</span>\n<span class=\"err\">\u2502</span>\n<span class=\"err\">\u2514\u2500\u2500</span><span class=\"w\"> </span><span class=\"n\">Non</span><span class=\"o\">-</span><span class=\"n\">supervis\u00e9</span><span class=\"w\"> </span><span class=\"p\">(</span><span class=\"n\">donn\u00e9es</span><span class=\"w\"> </span><span class=\"n\">non</span><span class=\"w\"> </span><span class=\"err\">\u00e9</span><span class=\"n\">tiquet\u00e9es</span><span class=\"w\"> </span><span class=\"err\">\u2014</span><span class=\"w\"> </span><span class=\"n\">on</span><span class=\"w\"> </span><span class=\"n\">cherche</span><span class=\"w\"> </span><span class=\"n\">la</span><span class=\"w\"> </span><span class=\"n\">structure</span><span class=\"p\">)</span>\n<span class=\"w\">    </span><span class=\"err\">\u251c\u2500\u2500</span><span class=\"w\"> </span><span class=\"n\">Clustering</span><span class=\"w\">          </span><span class=\"err\">\u2192</span><span class=\"w\"> </span><span class=\"n\">regrouper</span><span class=\"w\"> </span><span class=\"n\">des</span><span class=\"w\"> </span><span class=\"n\">individus</span><span class=\"w\"> </span><span class=\"n\">similaires</span><span class=\"w\">  </span><span class=\"nl\">ex:</span><span class=\"w\"> </span><span class=\"n\">segmentation</span><span class=\"w\"> </span><span class=\"n\">client</span>\n<span class=\"w\">    </span><span class=\"err\">\u251c\u2500\u2500</span><span class=\"w\"> </span><span class=\"n\">R\u00e9duction</span><span class=\"w\"> </span><span class=\"n\">de</span><span class=\"w\"> </span><span class=\"n\">dimension</span><span class=\"w\"> </span><span class=\"err\">\u2192</span><span class=\"w\"> </span><span class=\"n\">compresser</span><span class=\"w\"> </span><span class=\"n\">l</span><span class=\"p\">&#39;</span><span class=\"n\">espace</span><span class=\"w\"> </span><span class=\"n\">de</span><span class=\"w\"> </span><span class=\"n\">features</span><span class=\"w\">   </span><span class=\"nl\">ex:</span><span class=\"w\"> </span><span class=\"n\">PCA</span><span class=\"p\">,</span><span class=\"w\"> </span><span class=\"n\">UMAP</span>\n<span class=\"w\">    </span><span class=\"err\">\u2514\u2500\u2500</span><span class=\"w\"> </span><span class=\"n\">R\u00e8gles</span><span class=\"w\"> </span><span class=\"n\">d</span><span class=\"p\">&#39;</span><span class=\"n\">association</span><span class=\"w\">  </span><span class=\"err\">\u2192</span><span class=\"w\"> </span><span class=\"n\">trouver</span><span class=\"w\"> </span><span class=\"n\">des</span><span class=\"w\"> </span><span class=\"n\">co</span><span class=\"o\">-</span><span class=\"n\">occurrences</span><span class=\"w\">        </span><span class=\"nl\">ex:</span><span class=\"w\"> </span><span class=\"n\">panier</span><span class=\"w\"> </span><span class=\"n\">d</span><span class=\"p\">&#39;</span><span class=\"n\">achat</span>\n</code></pre></div>\n<h4 id=\"ml-vs-programmation-classique\">ML vs Programmation classique</h4>\n<table>\n<thead>\n<tr>\n<th>Approche</th>\n<th>Entr\u00e9es</th>\n<th>Sortie</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Classique</strong></td>\n<td>Donn\u00e9es + R\u00e8gles manuelles</td>\n<td>R\u00e9sultats</td>\n</tr>\n<tr>\n<td><strong>ML</strong></td>\n<td>Donn\u00e9es + Exemples (r\u00e9sultats connus)</td>\n<td><strong>R\u00e8gles apprises</strong> \u2192 appliqu\u00e9es \u00e0 de nouvelles donn\u00e9es</td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<span class=\"paragraph\">\ud83d\udca1 Dans ce cours : s\u00e9ances 5\u20136 = supervis\u00e9 (clustering, r\u00e9gression, classification) ;\ns\u00e9ance 4 = non-supervis\u00e9 (PCA, UMAP, K-Means).</span>\n</blockquote></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "ac9ce1deb45c0419b0a9e386025272c0",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"13-domaines-dapplication\">1.3 \u00b7 Domaines d'application</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "214216f1af6e529bf49761a49a87db24",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "4b80577ac77033f02616c89d96788525",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"14-taxonomie-des-donnees\">1.4 \u00b7 Taxonomie des donn\u00e9es</h3>\n<h4 id=\"par-structure\">Par structure</h4>\n<span class=\"paragraph\">Exemple : les <strong>images</strong> sont des tableaux 2D de valeurs de pixels.</span>\n<table>\n<thead>\n<tr>\n<th>Type</th>\n<th>D\u00e9finition</th>\n<th>Exemples</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Structur\u00e9es</strong></td>\n<td>Sch\u00e9ma fixe, lignes/colonnes</td>\n<td>Tables SQL, CSV, Excel</td>\n</tr>\n<tr>\n<td><strong>Semi-structur\u00e9es</strong></td>\n<td>Hi\u00e9rarchie flexible</td>\n<td>JSON, XML, HTML</td>\n</tr>\n<tr>\n<td><strong>Non-structur\u00e9es</strong></td>\n<td>Aucun sch\u00e9ma</td>\n<td>Images, vid\u00e9os, textes libres</td>\n</tr>\n<tr>\n<td><strong>Multimodales</strong></td>\n<td>Combinaison de types</td>\n<td>R\u00e9seaux sociaux (texte + image)</td>\n</tr>\n</tbody>\n</table>\n<h4 id=\"par-nature-statistique\">Par nature statistique</h4>\n<div class=\"language-text codehilite\"><pre><span></span><code>Variables\n\u251c\u2500\u2500 Qualitatives (cat\u00e9gorielles)\n\u2502   \u251c\u2500\u2500 Nominales  \u2192 sans ordre   ex: couleur des yeux, pays d&#39;origine\n\u2502   \u2514\u2500\u2500 Ordinales  \u2192 avec ordre   ex: niveau d&#39;\u00e9tudes (L1 &lt; L2 &lt; M1 &lt; M2)\n\u2502\n\u2514\u2500\u2500 Quantitatives (num\u00e9riques)\n    \u251c\u2500\u2500 Discr\u00e8tes  \u2192 entiers      ex: nombre d&#39;enfants, nombre de clics\n    \u2514\u2500\u2500 Continues  \u2192 r\u00e9els        ex: taille, temp\u00e9rature, revenu, \u00e2ge\n</code></pre></div>\n<h4 id=\"etapes-de-preparation-des-donnees\">\u00c9tapes de pr\u00e9paration des donn\u00e9es</h4>\n<ol>\n<li><strong>Obtention</strong> : lecture depuis un fichier ou scraping web</li>\n<li><strong>Parsing</strong> : selon le format (CSV, XML, HTML, texte brut\u2026)</li>\n<li><strong>Nettoyage</strong> : les jeux de donn\u00e9es sont <em>\"almost always incomplete\"</em>.\n   Strat\u00e9gie simple : supprimer ou ignorer les enregistrements incomplets</li>\n<li><strong>Construction de structures</strong> : DataFrame si donn\u00e9es tiennent en m\u00e9moire,\n   base de donn\u00e9es sinon (mapping cl\u00e9s \u2192 valeurs)</li>\n</ol></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "f3c19aaea86caa1e2aaadf7d70468bb6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"15-sources-et-formats-de-donnees\">1.5 \u00b7 Sources et formats de donn\u00e9es</h3>\n<span class=\"paragraph\">Quatre fa\u00e7ons de collecter des donn\u00e9es :</span>\n<ul>\n<li><strong>Collecter de nouvelles donn\u00e9es</strong> depuis internet et autres sources</li>\n<li><strong>Utiliser des donn\u00e9es d\u00e9j\u00e0 stock\u00e9es</strong></li>\n<li><strong>R\u00e9utiliser les donn\u00e9es de quelqu'un d'autre</strong> (open data, Kaggle, UCI)</li>\n<li><strong>Acheter des donn\u00e9es</strong> (fournisseurs sp\u00e9cialis\u00e9s)</li>\n</ul>\n<h4 id=\"sources-techniques-panorama\">Sources techniques \u2014 panorama</h4>\n<table>\n<thead>\n<tr>\n<th>Source</th>\n<th>M\u00e9canisme</th>\n<th>Exemple</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Fichiers plats</strong></td>\n<td>CSV, Excel, JSON, Parquet sur disque</td>\n<td>Dataset Titanic</td>\n</tr>\n<tr>\n<td><strong>Bases relationnelles</strong></td>\n<td>SQL via SQLAlchemy (<code>pd.read_sql</code>)</td>\n<td>PostgreSQL, MySQL, SQLite</td>\n</tr>\n<tr>\n<td><strong>Bases NoSQL</strong></td>\n<td>Connecteurs sp\u00e9cialis\u00e9s</td>\n<td>MongoDB (documents), Redis (cl\u00e9-valeur), Cassandra (colonnes)</td>\n</tr>\n<tr>\n<td><strong>APIs REST</strong></td>\n<td>HTTP GET/POST \u2192 JSON</td>\n<td>Twitter API, OpenWeather, INSEE</td>\n</tr>\n<tr>\n<td><strong>Web scraping</strong></td>\n<td><code>BeautifulSoup</code>, <code>Scrapy</code></td>\n<td>Prix immobiliers, avis clients</td>\n</tr>\n<tr>\n<td><strong>Streaming</strong></td>\n<td>Kafka, Spark Streaming</td>\n<td>Logs temps r\u00e9el, IoT</td>\n</tr>\n</tbody>\n</table>\n<div class=\"language-python codehilite\"><pre><span></span><code><span class=\"c1\"># Exemple \u2014 requ\u00eate API REST avec requests</span>\n<span class=\"kn\">import</span><span class=\"w\"> </span><span class=\"nn\">requests</span><span class=\"o\">,</span><span class=\"w\"> </span><span class=\"nn\">pandas</span><span class=\"w\"> </span><span class=\"k\">as</span><span class=\"w\"> </span><span class=\"nn\">pd</span>\n\n<span class=\"n\">resp</span> <span class=\"o\">=</span> <span class=\"n\">requests</span><span class=\"o\">.</span><span class=\"n\">get</span><span class=\"p\">(</span><span class=\"s2\">&quot;https://api.example.com/data?year=2024&quot;</span><span class=\"p\">)</span>\n<span class=\"n\">df</span> <span class=\"o\">=</span> <span class=\"n\">pd</span><span class=\"o\">.</span><span class=\"n\">DataFrame</span><span class=\"p\">(</span><span class=\"n\">resp</span><span class=\"o\">.</span><span class=\"n\">json</span><span class=\"p\">()[</span><span class=\"s2\">&quot;results&quot;</span><span class=\"p\">])</span>\n\n<span class=\"c1\"># Exemple \u2014 lecture depuis une base SQL</span>\n<span class=\"kn\">from</span><span class=\"w\"> </span><span class=\"nn\">sqlalchemy</span><span class=\"w\"> </span><span class=\"kn\">import</span> <span class=\"n\">create_engine</span>\n<span class=\"n\">engine</span> <span class=\"o\">=</span> <span class=\"n\">create_engine</span><span class=\"p\">(</span><span class=\"s2\">&quot;sqlite:///magasin.db&quot;</span><span class=\"p\">)</span>\n<span class=\"n\">df</span> <span class=\"o\">=</span> <span class=\"n\">pd</span><span class=\"o\">.</span><span class=\"n\">read_sql</span><span class=\"p\">(</span><span class=\"s2\">&quot;SELECT * FROM ventes WHERE annee = 2024&quot;</span><span class=\"p\">,</span> <span class=\"n\">engine</span><span class=\"p\">)</span>\n</code></pre></div>\n<h4 id=\"fonctions-de-chargement-avec-pandas\">Fonctions de chargement avec pandas</h4>\n<table>\n<thead>\n<tr>\n<th>Fonction</th>\n<th>Format</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>pd.read_csv()</code></td>\n<td>CSV</td>\n<td>Donn\u00e9es d\u00e9limit\u00e9es \u2014 <strong>le plus fr\u00e9quent</strong></td>\n</tr>\n<tr>\n<td><code>pd.read_json()</code></td>\n<td>JSON</td>\n<td>JavaScript Object Notation</td>\n</tr>\n<tr>\n<td><code>pd.read_parquet()</code></td>\n<td>Parquet</td>\n<td>Format binaire Apache \u2014 tr\u00e8s performant</td>\n</tr>\n<tr>\n<td><code>pd.read_feather()</code></td>\n<td>Arrow/Feather</td>\n<td>Format binaire ultra-rapide en m\u00e9moire</td>\n</tr>\n<tr>\n<td><code>pd.read_excel()</code></td>\n<td>Excel</td>\n<td>Fichiers XLS/XLSX</td>\n</tr>\n<tr>\n<td><code>pd.read_sql()</code></td>\n<td>SQL</td>\n<td>R\u00e9sultat d'une requ\u00eate (via SQLAlchemy)</td>\n</tr>\n<tr>\n<td><code>pd.read_html()</code></td>\n<td>HTML</td>\n<td>Tableaux dans une page web</td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<span class=\"paragraph\">Certains formats (HDF5, ORC, Parquet) int\u00e8grent les types\ndirectement dans le fichier, \u00e9vitant l'inf\u00e9rence co\u00fbteuse du CSV.</span>\n</blockquote>\n<h4 id=\"formats-modernes-comparatif\">Formats modernes \u2014 comparatif</h4>\n<table>\n<thead>\n<tr>\n<th>Format</th>\n<th style=\"text-align: center;\">Stockage</th>\n<th style=\"text-align: center;\">Vitesse lecture</th>\n<th style=\"text-align: center;\">Colonnes s\u00e9lectives</th>\n<th>Usage recommand\u00e9</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>CSV</strong></td>\n<td style=\"text-align: center;\">Texte</td>\n<td style=\"text-align: center;\">Lente</td>\n<td style=\"text-align: center;\">Non</td>\n<td>\u00c9change, petits datasets</td>\n</tr>\n<tr>\n<td><strong>JSON</strong></td>\n<td style=\"text-align: center;\">Texte</td>\n<td style=\"text-align: center;\">Lente</td>\n<td style=\"text-align: center;\">Non</td>\n<td>APIs REST, donn\u00e9es hi\u00e9rarchiques</td>\n</tr>\n<tr>\n<td><strong>Parquet</strong></td>\n<td style=\"text-align: center;\">Binaire colonnaire</td>\n<td style=\"text-align: center;\">Tr\u00e8s rapide</td>\n<td style=\"text-align: center;\">Oui</td>\n<td>Analyses big data, stockage long terme</td>\n</tr>\n<tr>\n<td><strong>Arrow / Feather</strong></td>\n<td style=\"text-align: center;\">Binaire en-m\u00e9moire</td>\n<td style=\"text-align: center;\">Ultra-rapide</td>\n<td style=\"text-align: center;\">Oui</td>\n<td>\u00c9change entre outils (pandas \u2194 polars \u2194 Spark)</td>\n</tr>\n</tbody>\n</table>\n<h4 id=\"apache-arrow-le-standard-inter-outils-2025\">Apache Arrow \u2014 le standard inter-outils 2025</h4>\n<span class=\"paragraph\"><strong>Arrow</strong> est un format m\u00e9moire standardis\u00e9 (colonnaire, zero-copy) qui permet\n\u00e0 <strong>pandas</strong>, <strong>polars</strong>, <strong>DuckDB</strong>, <strong>Spark</strong> et <strong>R</strong> de partager des donn\u00e9es\nsans copie ni s\u00e9rialisation. <code>pd.read_feather()</code> et <code>pd.read_parquet()</code> utilisent Arrow en interne.</span>\n<div class=\"language-python codehilite\"><pre><span></span><code><span class=\"c1\"># Sauvegarder en Arrow/Feather (\u00e9change rapide entre outils)</span>\n<span class=\"n\">df</span><span class=\"o\">.</span><span class=\"n\">to_feather</span><span class=\"p\">(</span><span class=\"s2\">&quot;titanic.feather&quot;</span><span class=\"p\">)</span>\n<span class=\"n\">df2</span> <span class=\"o\">=</span> <span class=\"n\">pd</span><span class=\"o\">.</span><span class=\"n\">read_feather</span><span class=\"p\">(</span><span class=\"s2\">&quot;titanic.feather&quot;</span><span class=\"p\">)</span>  <span class=\"c1\"># 10\u00d7 plus rapide que CSV</span>\n</code></pre></div>\n<h4 id=\"parquet-vs-csv-lecture-columnar\">Parquet vs CSV \u2014 lecture columnar</h4>\n<div class=\"language-text codehilite\"><pre><span></span><code>CSV (ligne par ligne) :\nPassengerId | Survived | Pclass | Age | Fare  \u2190 toutes les colonnes lues\n    1       |    0     |   3    | 22  | 7.25\n    2       |    1     |   1    | 38  | 71.28\n\nParquet (colonne par colonne) :\n[PassengerId: 1,2,3...] [Age: 22,38,26...]   \u2190 seulement les colonnes demand\u00e9es\n\u2192 Gain : 5\u201310\u00d7 moins d&#39;espace, 10\u00d7 plus rapide pour requ\u00eates s\u00e9lectives\n</code></pre></div>\n<div class=\"language-python codehilite\"><pre><span></span><code><span class=\"c1\"># [R2] McKinney, Chap. 6 \u2014 Principaux arguments de read_csv (Table 6-2)</span>\n<span class=\"kn\">import</span><span class=\"w\"> </span><span class=\"nn\">pandas</span><span class=\"w\"> </span><span class=\"k\">as</span><span class=\"w\"> </span><span class=\"nn\">pd</span>\n\n<span class=\"n\">df</span> <span class=\"o\">=</span> <span class=\"n\">pd</span><span class=\"o\">.</span><span class=\"n\">read_csv</span><span class=\"p\">(</span>\n    <span class=\"s2\">&quot;titanic.csv&quot;</span><span class=\"p\">,</span>\n    <span class=\"n\">sep</span><span class=\"o\">=</span><span class=\"s2\">&quot;,&quot;</span><span class=\"p\">,</span>                         <span class=\"c1\"># d\u00e9limiteur (d\u00e9faut virgule)</span>\n    <span class=\"n\">header</span><span class=\"o\">=</span><span class=\"mi\">0</span><span class=\"p\">,</span>                        <span class=\"c1\"># ligne d&#39;en-t\u00eate (0 = 1\u00e8re ligne)</span>\n    <span class=\"n\">index_col</span><span class=\"o\">=</span><span class=\"kc\">None</span><span class=\"p\">,</span>                  <span class=\"c1\"># colonne \u00e0 utiliser comme index</span>\n    <span class=\"n\">na_values</span><span class=\"o\">=</span><span class=\"p\">[</span><span class=\"s2\">&quot;NA&quot;</span><span class=\"p\">,</span> <span class=\"s2\">&quot;NULL&quot;</span><span class=\"p\">,</span> <span class=\"s2\">&quot;?&quot;</span><span class=\"p\">],</span>   <span class=\"c1\"># valeurs \u2192 NaN</span>\n    <span class=\"n\">nrows</span><span class=\"o\">=</span><span class=\"mi\">1000</span>                       <span class=\"c1\"># lire seulement N lignes</span>\n<span class=\"p\">)</span>\n\n<span class=\"c1\"># Parquet \u2014 lecture s\u00e9lective de colonnes uniquement</span>\n<span class=\"n\">df2</span> <span class=\"o\">=</span> <span class=\"n\">pd</span><span class=\"o\">.</span><span class=\"n\">read_parquet</span><span class=\"p\">(</span><span class=\"s2\">&quot;titanic.parquet&quot;</span><span class=\"p\">,</span> <span class=\"n\">columns</span><span class=\"o\">=</span><span class=\"p\">[</span><span class=\"s2\">&quot;Age&quot;</span><span class=\"p\">,</span> <span class=\"s2\">&quot;Survived&quot;</span><span class=\"p\">])</span>\n</code></pre></div></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "97a55218ade984346893e10a514ec392",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"16-cycle-de-vie-des-donnees-crisp-dm\">1.6 \u00b7 Cycle de vie des donn\u00e9es \u2014 CRISP-DM</h3>\n<blockquote>\n<span class=\"paragraph\"><strong>CRISP-DM</strong> (<em>Cross-Industry Standard Processfor Data Mining</em>)\ncomme la m\u00e9thodologie de r\u00e9f\u00e9rence pour r\u00e9soudre un probl\u00e8me data\nde bout en bout.\nC'est un processus <strong>it\u00e9ratif</strong> \u2014 on revient souvent en arri\u00e8re entre les phases.</span>\n</blockquote>\n<hr />\n<h4 id=\"phase-1-comprehension-metier-business-understanding\">Phase 1 \u00b7 Compr\u00e9hension m\u00e9tier (<em>Business Understanding</em>)</h4>\n<span class=\"paragraph\">Avant toute ligne de code, il faut comprendre le <strong>contexte organisationnel</strong> :</span>\n<table>\n<thead>\n<tr>\n<th>\u00c9tape</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Comprendre le processus m\u00e9tier</td>\n<td>Quelle activit\u00e9 est concern\u00e9e ? Quelles d\u00e9cisions sont prises ?</td>\n</tr>\n<tr>\n<td>D\u00e9finir et cadrer le probl\u00e8me</td>\n<td>Formuler pr\u00e9cis\u00e9ment la question \u00e0 r\u00e9soudre</td>\n</tr>\n<tr>\n<td>D\u00e9finir l'objectif m\u00e9tier</td>\n<td>Quel r\u00e9sultat concret est attendu ? (r\u00e9duction du churn, d\u00e9tection de fraude\u2026)</td>\n</tr>\n<tr>\n<td>Fixer les crit\u00e8res de succ\u00e8s</td>\n<td>Quels indicateurs valideront que le projet a r\u00e9ussi ? (KPIs, seuils)</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h4 id=\"phase-2-comprehension-des-donnees-data-understanding\">Phase 2 \u00b7 Compr\u00e9hension des donn\u00e9es (<em>Data Understanding</em>)</h4>\n<table>\n<thead>\n<tr>\n<th>\u00c9tape</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Identifier les sources</strong></td>\n<td>O\u00f9 les donn\u00e9es sont-elles g\u00e9n\u00e9r\u00e9es, stock\u00e9es, et comment circulent-elles ?</td>\n</tr>\n<tr>\n<td><strong>Comprendre l'origine</strong></td>\n<td>D'o\u00f9 viennent les donn\u00e9es, comment sont-elles trait\u00e9es ?</td>\n</tr>\n<tr>\n<td><strong>Analyser la s\u00e9mantique</strong></td>\n<td>Que signifient les colonnes dans le contexte m\u00e9tier ?</td>\n</tr>\n<tr>\n<td><strong>\u00c9valuer les sources externes</strong></td>\n<td>Existe-t-il des donn\u00e9es sectorielles compl\u00e9mentaires utilisables ?</td>\n</tr>\n<tr>\n<td><strong>V\u00e9rifier les labels (ML)</strong></td>\n<td>La variable cible est-elle disponible ? Y a-t-il des labels tardifs (<em>late labels</em>) ?</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h4 id=\"phase-3-collecte-des-donnees-data-collection\">Phase 3 \u00b7 Collecte des donn\u00e9es (<em>Data Collection</em>)</h4>\n<span class=\"paragraph\">Quatre strat\u00e9gies pour obtenir les donn\u00e9es :</span>\n<ul>\n<li>\ud83c\udf10 <strong>Collecter de nouvelles donn\u00e9es</strong> depuis internet ou d'autres sources</li>\n<li>\ud83d\uddc4\ufe0f <strong>Utiliser des donn\u00e9es d\u00e9j\u00e0 stock\u00e9es</strong> dans les syst\u00e8mes existants</li>\n<li>\u267b\ufe0f <strong>R\u00e9utiliser les donn\u00e9es de quelqu'un d'autre</strong> (open data, Kaggle, UCI)</li>\n<li>\ud83d\udcb3 <strong>Acheter des donn\u00e9es</strong> aupr\u00e8s de fournisseurs sp\u00e9cialis\u00e9s</li>\n</ul>\n<hr />\n<h4 id=\"phase-4-preparation-des-donnees-data-preparation\">Phase 4 \u00b7 Pr\u00e9paration des donn\u00e9es (<em>Data Preparation</em>)</h4>\n<div class=\"language-text codehilite\"><pre><span></span><code>D\u00e9couverte         Collecte &amp;      Nettoyage      Transformation    Validation &amp;\n&amp; Profilage   \u2192   Enrichissement  \u2192  des donn\u00e9es  \u2192  &amp; Structuration \u2192  Publication\n</code></pre></div>\n<table>\n<thead>\n<tr>\n<th>\u00c9tape</th>\n<th>Actions typiques</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>D\u00e9couverte &amp; profilage</strong></td>\n<td>Statistiques descriptives, d\u00e9tection des anomalies</td>\n</tr>\n<tr>\n<td><strong>Collecte &amp; enrichissement</strong></td>\n<td>Jointure avec sources externes, ajout de features</td>\n</tr>\n<tr>\n<td><strong>Nettoyage</strong></td>\n<td>Traitement des valeurs manquantes, doublons, outliers</td>\n</tr>\n<tr>\n<td><strong>Transformation &amp; structuration</strong></td>\n<td>Encodage, normalisation, feature engineering</td>\n</tr>\n<tr>\n<td><strong>Validation &amp; publication</strong></td>\n<td>Contr\u00f4le qualit\u00e9, mise \u00e0 disposition du dataset final</td>\n</tr>\n</tbody>\n</table>\n<hr />\n<h4 id=\"phase-5-modelisation-modelling\">Phase 5 \u00b7 Mod\u00e9lisation (<em>Modelling</em>)</h4>\n<blockquote>\n<span class=\"paragraph\"><em>\"Building a model is a very iterative process because there is no such\nthing as a final and perfect solution.\"</em></span>\n</blockquote>\n<span class=\"paragraph\">On s\u00e9lectionne et entra\u00eene les algorithmes adapt\u00e9s au probl\u00e8me (classification,\nr\u00e9gression, clustering\u2026). De nombreuses techniques ML et statistiques sont\ndisponibles dans les plateformes modernes (scikit-learn, XGBoost, etc.).</span>\n<hr />\n<h4 id=\"phase-6-evaluation-model-evaluation\">Phase 6 \u00b7 \u00c9valuation (<em>Model Evaluation</em>)</h4>\n<span class=\"paragraph\">Le choix des m\u00e9triques d\u00e9pend du <strong>type de probl\u00e8me</strong> :</span>\n<table>\n<thead>\n<tr>\n<th>Classification</th>\n<th>R\u00e9gression</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Matrice de confusion</td>\n<td>MAE (Mean Absolute Error)</td>\n</tr>\n<tr>\n<td>Accuracy, Pr\u00e9cision, Rappel</td>\n<td>MSE / RMSE</td>\n</tr>\n<tr>\n<td>F-score (F1)</td>\n<td>RMSLE</td>\n</tr>\n<tr>\n<td>AUC-ROC</td>\n<td>R\u00b2 et R\u00b2 ajust\u00e9</td>\n</tr>\n<tr>\n<td>Log loss, Gini coefficient</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<span class=\"paragraph\">Ces m\u00e9triques seront d\u00e9taill\u00e9es en <strong>S\u00e9ance 6</strong>.</span>\n</blockquote>\n<hr />\n<h4 id=\"phase-7-deploiement-deployment\">Phase 7 \u00b7 D\u00e9ploiement (<em>Deployment</em>)</h4>\n<span class=\"paragraph\">La mise en production s'inscrit dans une d\u00e9marche <strong>MLOps</strong> :</span>\n<table>\n<thead>\n<tr>\n<th>\u00c9tape MLOps</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Packaging &amp; d\u00e9ploiement</strong></td>\n<td>S\u00e9rialisation du mod\u00e8le (joblib, ONNX), exposition via API</td>\n</tr>\n<tr>\n<td><strong>Lignage du mod\u00e8le</strong></td>\n<td>Tra\u00e7abilit\u00e9 compl\u00e8te : donn\u00e9es, code, param\u00e8tres (MLflow)</td>\n</tr>\n<tr>\n<td><strong>Monitoring &amp; logging</strong></td>\n<td>Surveillance des performances en production, d\u00e9tection de d\u00e9rive</td>\n</tr>\n<tr>\n<td><strong>R\u00e9-entra\u00eenement</strong></td>\n<td>D\u00e9clenchement automatique si les performances chutent</td>\n</tr>\n<tr>\n<td><strong>Versioning</strong></td>\n<td>Code, donn\u00e9es et pipeline versionn\u00e9s (git, DVC)</td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<span class=\"paragraph\">Ces outils seront mis en pratique en <strong>S\u00e9ance 7</strong> (MLflow, Streamlit).</span>\n</blockquote>\n<hr />\n<h4 id=\"cas-dusage-complet-analyse-du-churn-client\">Cas d'usage complet \u2014 Analyse du Churn Client</h4>\n<table>\n<thead>\n<tr>\n<th>\u00c9tape CRISP-DM</th>\n<th>Actions concr\u00e8tes</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Compr\u00e9hension m\u00e9tier</strong></td>\n<td>D\u00e9finir le churn, identifier son co\u00fbt pour l'entreprise</td>\n</tr>\n<tr>\n<td><strong>Compr\u00e9hension des donn\u00e9es</strong></td>\n<td>Explorer les donn\u00e9es d'appels, factures, r\u00e9clamations</td>\n</tr>\n<tr>\n<td><strong>Collecte</strong></td>\n<td>Extraire les donn\u00e9es CRM, ajouter des tendances mensuelles</td>\n</tr>\n<tr>\n<td><strong>Pr\u00e9paration</strong></td>\n<td>Nettoyer, agr\u00e9ger, standardiser \u2192 profils clients pr\u00eats</td>\n</tr>\n<tr>\n<td><strong>Mod\u00e9lisation</strong></td>\n<td>Construire un mod\u00e8le pr\u00e9dictif (ex : Random Forest)</td>\n</tr>\n<tr>\n<td><strong>\u00c9valuation</strong></td>\n<td>Identifier les drivers de churn, valider les KPIs de suivi</td>\n</tr>\n<tr>\n<td><strong>D\u00e9ploiement</strong></td>\n<td>G\u00e9n\u00e9rer des listes d'abonn\u00e9s cibl\u00e9s pour des campagnes anti-churn</td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<span class=\"paragraph\">\u26a0\ufe0f <strong>CRISP-DM est it\u00e9ratif</strong> \u2014 la mod\u00e9lisation peut r\u00e9v\u00e9ler un besoin\nde features suppl\u00e9mentaires \u2192 retour imm\u00e9diat \u00e0 la phase de pr\u00e9paration.</span>\n</blockquote></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "7298572a2b6b63b42402a3d8565c1be7",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "e6d80fb569177bcca31cd7083f682318",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"17-ecosysteme-python-pour-lanalyse-de-donnees\">1.7 \u00b7 \u00c9cosyst\u00e8me Python pour l'analyse de donn\u00e9es</h3>\n<h4 id=\"pourquoi-python\">Pourquoi Python ?</h4>\n<ul>\n<li><em>L'analyse de donn\u00e9es est une discipline de d\u00e9cision guid\u00e9e par les faits</em>,</li>\n<li>Python fournit un des environnements les plus d\u00e9velopp\u00e9s pour l'analyse et la science de donn\u00e9es.</li>\n<li>Les bases s'acqui\u00e8rent facilement</li>\n<li><strong>open-source</strong> : les algorithmes cruciaux sont librement disponibles</li>\n</ul>\n<h4 id=\"bibliotheques-fondamentales\">Biblioth\u00e8ques fondamentales</h4>\n<table>\n<thead>\n<tr>\n<th>Biblioth\u00e8que</th>\n<th>R\u00f4le</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>NumPy</strong></td>\n<td>Calcul num\u00e9rique, tableaux N-D</td>\n</tr>\n<tr>\n<td><strong>SciPy</strong></td>\n<td>Calcul scientifique (stats, optimisation)</td>\n</tr>\n<tr>\n<td><strong>pandas</strong></td>\n<td>DataFrames, I/O, manipulation</td>\n</tr>\n<tr>\n<td><strong>polars</strong></td>\n<td>DataFrames ultra-rapides (Rust, Arrow-natif)</td>\n</tr>\n<tr>\n<td><strong>scikit-learn</strong></td>\n<td>Machine learning en Python</td>\n</tr>\n<tr>\n<td><strong>statsmodels</strong></td>\n<td>Tests statistiques, mod\u00e8les \u00e9conom\u00e9triques</td>\n</tr>\n<tr>\n<td><strong>matplotlib</strong></td>\n<td>Visualisation 2D de r\u00e9f\u00e9rence</td>\n</tr>\n<tr>\n<td><strong>seaborn/matplotlib</strong></td>\n<td>Visualisation statistique</td>\n</tr>\n</tbody>\n</table>\n<h4 id=\"pandas-vs-polars-quand-utiliser-quoi\">pandas vs polars \u2014 quand utiliser quoi ?</h4>\n<table>\n<thead>\n<tr>\n<th>Crit\u00e8re</th>\n<th>pandas</th>\n<th>polars</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Maturit\u00e9 / \u00e9cosyst\u00e8me</td>\n<td>Tr\u00e8s mature (2008)</td>\n<td>R\u00e9cent (2021), croissance rapide</td>\n</tr>\n<tr>\n<td>Syntaxe</td>\n<td>Famili\u00e8re, large documentation</td>\n<td>Expressions lazy, plus verbeux</td>\n</tr>\n<tr>\n<td>Performance (&gt;1M lignes)</td>\n<td>Lente (GIL Python)</td>\n<td>5\u201320\u00d7 plus rapide (Rust, multi-thread)</td>\n</tr>\n<tr>\n<td>Int\u00e9gration Arrow</td>\n<td>Via <code>pyarrow</code></td>\n<td>Natif</td>\n</tr>\n<tr>\n<td>Usage dans ce cours</td>\n<td><strong>Principal</strong></td>\n<td>Mentionn\u00e9 pour les gros volumes</td>\n</tr>\n</tbody>\n</table>\n<div class=\"language-python codehilite\"><pre><span></span><code><span class=\"c1\"># polars \u2014 syntaxe (pour r\u00e9f\u00e9rence)</span>\n<span class=\"kn\">import</span><span class=\"w\"> </span><span class=\"nn\">polars</span><span class=\"w\"> </span><span class=\"k\">as</span><span class=\"w\"> </span><span class=\"nn\">pl</span>\n\n<span class=\"n\">df_pl</span> <span class=\"o\">=</span> <span class=\"n\">pl</span><span class=\"o\">.</span><span class=\"n\">read_csv</span><span class=\"p\">(</span><span class=\"s2\">&quot;titanic.csv&quot;</span><span class=\"p\">)</span>\n<span class=\"n\">df_pl</span><span class=\"o\">.</span><span class=\"n\">filter</span><span class=\"p\">(</span><span class=\"n\">pl</span><span class=\"o\">.</span><span class=\"n\">col</span><span class=\"p\">(</span><span class=\"s2\">&quot;Survived&quot;</span><span class=\"p\">)</span> <span class=\"o\">==</span> <span class=\"mi\">1</span><span class=\"p\">)</span><span class=\"o\">.</span><span class=\"n\">group_by</span><span class=\"p\">(</span><span class=\"s2\">&quot;Pclass&quot;</span><span class=\"p\">)</span><span class=\"o\">.</span><span class=\"n\">agg</span><span class=\"p\">(</span>\n    <span class=\"n\">pl</span><span class=\"o\">.</span><span class=\"n\">col</span><span class=\"p\">(</span><span class=\"s2\">&quot;Age&quot;</span><span class=\"p\">)</span><span class=\"o\">.</span><span class=\"n\">mean</span><span class=\"p\">()</span><span class=\"o\">.</span><span class=\"n\">alias</span><span class=\"p\">(</span><span class=\"s2\">&quot;age_moy&quot;</span><span class=\"p\">)</span>\n<span class=\"p\">)</span>\n<span class=\"c1\"># \u2192 \u00e9quivalent de df[df.Survived==1].groupby(&quot;Pclass&quot;)[&quot;Age&quot;].mean() en pandas</span>\n</code></pre></div>\n<h4 id=\"pandas-les-deux-structures-cles\">pandas \u2014 les deux structures cl\u00e9s</h4>\n<ul>\n<li><em>DataFrame</em> : \u00ab Un DataFrame repr\u00e9sente un tableau de donn\u00e9es rectangulaire [\u2026] On peut le concevoir comme un dictionnaire de Series partageant toutes le m\u00eame index. \u00bb</li>\n<li><em>Series</em> : \u00ab Tableau unidimensionnel index\u00e9 pouvant contenir n'importe quel type de donn\u00e9es. Contrairement \u00e0 un tableau NumPy, chaque valeur est associ\u00e9e \u00e0 un label d'index explicite, ce qui permet un acc\u00e8s et une manipulation des donn\u00e9es par nom plut\u00f4t que par position.\n \u00bb</li>\n</ul>\n<div class=\"language-python codehilite\"><pre><span></span><code><span class=\"kn\">import</span><span class=\"w\"> </span><span class=\"nn\">pandas</span><span class=\"w\"> </span><span class=\"k\">as</span><span class=\"w\"> </span><span class=\"nn\">pd</span>\n\n<span class=\"c1\"># \u2500\u2500 pd.Series : tableau 1D index\u00e9 \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500</span>\n<span class=\"c1\"># [R3] : &quot;A Pandas Series is a one-dimensional array of indexed data&quot;</span>\n<span class=\"n\">s</span> <span class=\"o\">=</span> <span class=\"n\">pd</span><span class=\"o\">.</span><span class=\"n\">Series</span><span class=\"p\">([</span><span class=\"mf\">0.25</span><span class=\"p\">,</span> <span class=\"mf\">0.5</span><span class=\"p\">,</span> <span class=\"mf\">0.75</span><span class=\"p\">,</span> <span class=\"mf\">1.0</span><span class=\"p\">])</span>\n\n<span class=\"c1\"># Index explicite personnalis\u00e9 \u2014 [R3] Chap. 3</span>\n<span class=\"n\">pop</span> <span class=\"o\">=</span> <span class=\"n\">pd</span><span class=\"o\">.</span><span class=\"n\">Series</span><span class=\"p\">(</span>\n    <span class=\"p\">{</span><span class=\"s2\">&quot;Dakar&quot;</span><span class=\"p\">:</span> <span class=\"mi\">3_800_000</span><span class=\"p\">,</span> <span class=\"s2\">&quot;Abidjan&quot;</span><span class=\"p\">:</span> <span class=\"mi\">5_300_000</span><span class=\"p\">,</span> <span class=\"s2\">&quot;Lagos&quot;</span><span class=\"p\">:</span> <span class=\"mi\">15_000_000</span><span class=\"p\">},</span>\n    <span class=\"n\">name</span><span class=\"o\">=</span><span class=\"s2\">&quot;population&quot;</span>\n<span class=\"p\">)</span>\n<span class=\"nb\">print</span><span class=\"p\">(</span><span class=\"n\">pop</span><span class=\"p\">)</span>\n<span class=\"c1\"># Dakar       3800000</span>\n<span class=\"c1\"># Abidjan     5300000</span>\n<span class=\"c1\"># Lagos      15000000</span>\n\n<span class=\"c1\"># \u2500\u2500 pd.DataFrame : tableau 2D \u00e0 index flexible \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500</span>\n<span class=\"n\">df</span> <span class=\"o\">=</span> <span class=\"n\">pd</span><span class=\"o\">.</span><span class=\"n\">DataFrame</span><span class=\"p\">({</span>\n    <span class=\"s2\">&quot;ville&quot;</span><span class=\"p\">:</span>  <span class=\"p\">[</span><span class=\"s2\">&quot;Dakar&quot;</span><span class=\"p\">,</span> <span class=\"s2\">&quot;Abidjan&quot;</span><span class=\"p\">,</span> <span class=\"s2\">&quot;Lagos&quot;</span><span class=\"p\">],</span>\n    <span class=\"s2\">&quot;pays&quot;</span><span class=\"p\">:</span>   <span class=\"p\">[</span><span class=\"s2\">&quot;S\u00e9n\u00e9gal&quot;</span><span class=\"p\">,</span> <span class=\"s2\">&quot;C\u00f4te d&#39;Ivoire&quot;</span><span class=\"p\">,</span> <span class=\"s2\">&quot;Nigeria&quot;</span><span class=\"p\">],</span>\n    <span class=\"s2\">&quot;pop_M&quot;</span><span class=\"p\">:</span>  <span class=\"p\">[</span><span class=\"mf\">3.8</span><span class=\"p\">,</span> <span class=\"mf\">5.3</span><span class=\"p\">,</span> <span class=\"mf\">15.0</span><span class=\"p\">],</span>\n<span class=\"p\">})</span>\n<span class=\"c1\"># df.shape \u2192 (3, 3) : 3 lignes \u00d7 3 colonnes  \u2014 [R1] Chap. 2.6</span>\n</code></pre></div></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": "59761520366e17fc540c737e5900d98d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"18-ethique-rgpd-et-biais-dans-les-donnees\">1.8 \u00b7 \u00c9thique, RGPD et biais dans les donn\u00e9es</h3>\n<h4 id=\"biais-algorithmiques-et-la-loi-de-campbell\">Biais algorithmiques et la loi de Campbell</h4>\n<span class=\"paragraph\"><strong>Loi de Campbell</strong> :</span>\n<blockquote>\n<span class=\"paragraph\"><em>\"The more any quantitative social indicator is used for social decision-making,\nthe more subject it will be to corruption pressures and the more apt it will be\nto distort and corrupt the social processes it is intended to monitor.\"</em></span>\n<span class=\"paragraph\"><em>\"Plus un indicateur social quantitatif est utilis\u00e9 comme aide \u00e0 la d\u00e9cision en mati\u00e8re de politique sociale,\nplus cet indicateur est susceptible d'\u00eatre manipul\u00e9 et d'agir comme facteur de distorsion,\nfaussant ainsi les processus sociaux qu'il est cens\u00e9 surveiller.\"</em></span>\n</blockquote>\n<h4 id=\"correlation-causalite\">Corr\u00e9lation \u2260 Causalit\u00e9</h4>\n<span class=\"paragraph\"><strong>Exemple fil rouge \u2014 Google Flu Trends (2008\u20132013)</strong></span>\n<span class=\"paragraph\">Google a observ\u00e9 que le nombre de recherches du mot <em>\"flu\"</em> (grippe)\naugmentait chaque hiver en m\u00eame temps que le nombre de cas de grippe d\u00e9clar\u00e9s.\nCorr\u00e9lation forte \u2192 Google en a conclu qu'on pouvait <strong>pr\u00e9dire</strong> l'\u00e9pid\u00e9mie\nen temps r\u00e9el, avant m\u00eame les rapports officiels des centres de sant\u00e9.</span>\n<span class=\"paragraph\">Mais attention : les recherches Google ne <em>causent</em> pas la grippe.\nLes gens cherchent <em>\"flu\"</em> <strong>parce qu'ils ont d\u00e9j\u00e0 des sympt\u00f4mes</strong> ou\nentendent parler de l'\u00e9pid\u00e9mie autour d'eux.\nLa vraie cha\u00eene causale est :</span>\n<div class=\"language-text codehilite\"><pre><span></span><code>Virus grippal \u2192 sympt\u00f4mes \u2192 gens malades cherchent &quot;flu&quot; sur Google\n     \u2191                              \u2191\n  CAUSE                        EFFET (observable rapidement)\n</code></pre></div>\n<span class=\"paragraph\">Les recherches sont un <strong>signal pr\u00e9coce</strong> de l'\u00e9pid\u00e9mie, pas sa cause.\nLe mod\u00e8le a d'ailleurs \u00e9chou\u00e9 en 2013 en sur-estimant massivement l'\u00e9pid\u00e9mie \u2014\npreuve qu'une corr\u00e9lation sans compr\u00e9hension causale est fragile.</span>\n<span class=\"paragraph\"><strong>R\u00e8gle d'or</strong> : avant de conclure que A <em>cause</em> B parce qu'ils sont corr\u00e9l\u00e9s,\ndemandez-vous toujours :</span>\n<table>\n<thead>\n<tr>\n<th>Question</th>\n<th>Exemple</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Y a-t-il une <strong>cause commune</strong> cach\u00e9e ?</td>\n<td>La saison hivernale cause <em>\u00e0 la fois</em> la grippe et les recherches</td>\n</tr>\n<tr>\n<td>Le sens est-il <strong>invers\u00e9</strong> ?</td>\n<td>C'est la grippe qui provoque les recherches, pas l'inverse</td>\n</tr>\n<tr>\n<td>Est-ce une <strong>co\u00efncidence</strong> statistique ?</td>\n<td>La consommation de glaces est corr\u00e9l\u00e9e aux noyades (cause commune : l'\u00e9t\u00e9)</td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<span class=\"paragraph\">\u26a0\ufe0f Ce pi\u00e8ge (corr\u00e9lation \u2260 causalit\u00e9) sera approfondi en <strong>S\u00e9ance 3</strong>.</span>\n</blockquote>\n<h4 id=\"le-rgpd-pour-le-data-scientist\">Le RGPD pour le Data Scientist</h4>\n<table>\n<thead>\n<tr>\n<th>Principe</th>\n<th>Signification pratique</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Lic\u00e9it\u00e9</strong></td>\n<td>Traitement sur base l\u00e9gale (consentement, int\u00e9r\u00eat l\u00e9gitime\u2026)</td>\n</tr>\n<tr>\n<td><strong>Finalit\u00e9</strong></td>\n<td>But pr\u00e9cis et l\u00e9gitime lors de la collecte</td>\n</tr>\n<tr>\n<td><strong>Minimisation</strong></td>\n<td>Ne collecter que les donn\u00e9es strictement n\u00e9cessaires</td>\n</tr>\n<tr>\n<td><strong>Exactitude</strong></td>\n<td>Donn\u00e9es \u00e0 jour, corrig\u00e9es si besoin</td>\n</tr>\n<tr>\n<td><strong>Limitation de conservation</strong></td>\n<td>Dur\u00e9e de vie d\u00e9finie pour chaque donn\u00e9e</td>\n</tr>\n<tr>\n<td><strong>S\u00e9curit\u00e9</strong></td>\n<td>Protection contre acc\u00e8s non autoris\u00e9s et pertes</td>\n</tr>\n<tr>\n<td><strong>Responsabilit\u00e9</strong></td>\n<td>Pouvoir d\u00e9montrer la conformit\u00e9 (<em>accountability</em>)</td>\n</tr>\n</tbody>\n</table>\n<h4 id=\"types-de-biais-courants\">Types de biais courants</h4>\n<table>\n<thead>\n<tr>\n<th>Type</th>\n<th>Description</th>\n<th>Exemple concret</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>S\u00e9lection</strong></td>\n<td>\u00c9chantillon non repr\u00e9sentatif</td>\n<td>Sondage web \u2192 exclut les non-connect\u00e9s</td>\n</tr>\n<tr>\n<td><strong>Confirmation</strong></td>\n<td>Chercher \u00e0 valider une hypoth\u00e8se</td>\n<td>Ne tester que les cas favorables</td>\n</tr>\n<tr>\n<td><strong>Label</strong></td>\n<td>Annotations humaines avec pr\u00e9jug\u00e9s</td>\n<td>Algorithme de recrutement biais\u00e9</td>\n</tr>\n<tr>\n<td><strong>Historique</strong></td>\n<td>Donn\u00e9es pass\u00e9es \u2192 in\u00e9galit\u00e9s perp\u00e9tu\u00e9es</td>\n<td>Cr\u00e9dit refus\u00e9 selon quartier</td>\n</tr>\n<tr>\n<td><strong>Simpson</strong></td>\n<td>Tendance invers\u00e9e \u00e0 l'agr\u00e9gation</td>\n<td>Admissions universitaires USA</td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "b872de48df4ac8d23c7e28feacde0064",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"19-introduction-a-marimo-uv-plus-de-details-sur-la-seance1-1\">1.9 \u00b7 Introduction \u00e0 marimo &amp; uv ( plus de d\u00e9tails sur la <strong><em>seance1-1</em></strong>)</h3>\n<h4 id=\"contexte\">Contexte</h4>\n<span class=\"paragraph\"><strong>Jupyter</strong> est l'environnement de r\u00e9f\u00e9rence pour la data science interactive. <strong>marimo</strong> en est le successeur moderne (2025) :</span>\n<table>\n<thead>\n<tr>\n<th>Probl\u00e8me Jupyter</th>\n<th>Solution marimo</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Ordre d'ex\u00e9cution non d\u00e9terministe</td>\n<td>Graphe de d\u00e9pendances r\u00e9actif</td>\n</tr>\n<tr>\n<td>\u00c9tat cach\u00e9 dangereux</td>\n<td>Chaque cellule = fonction Python pure</td>\n</tr>\n<tr>\n<td>Reproductibilit\u00e9 difficile</td>\n<td><code>.py</code> valide, versionnable avec git</td>\n</tr>\n<tr>\n<td>Widgets n\u00e9cessitent un backend</td>\n<td><code>mo.ui.slider</code>, <code>mo.ui.dropdown</code> natifs</td>\n</tr>\n</tbody>\n</table>\n<h4 id=\"marimo-fonctionnement-reactif\">marimo \u2014 Fonctionnement r\u00e9actif</h4>\n<div class=\"language-python codehilite\"><pre><span></span><code><span class=\"kn\">import</span><span class=\"w\"> </span><span class=\"nn\">marimo</span><span class=\"w\"> </span><span class=\"k\">as</span><span class=\"w\"> </span><span class=\"nn\">mo</span>\n\n<span class=\"c1\"># Un slider \u2014 quand sa valeur change, toutes les cellules</span>\n<span class=\"c1\"># qui utilisent `n` sont AUTOMATIQUEMENT recalcul\u00e9es</span>\n<span class=\"n\">n</span> <span class=\"o\">=</span> <span class=\"n\">mo</span><span class=\"o\">.</span><span class=\"n\">ui</span><span class=\"o\">.</span><span class=\"n\">slider</span><span class=\"p\">(</span><span class=\"mi\">1</span><span class=\"p\">,</span> <span class=\"mi\">100</span><span class=\"p\">,</span> <span class=\"n\">value</span><span class=\"o\">=</span><span class=\"mi\">10</span><span class=\"p\">,</span> <span class=\"n\">label</span><span class=\"o\">=</span><span class=\"s2\">&quot;Nombre de points&quot;</span><span class=\"p\">)</span>\n\n<span class=\"c1\"># Cellule d\u00e9pendante : se met \u00e0 jour sans clic</span>\n<span class=\"kn\">import</span><span class=\"w\"> </span><span class=\"nn\">numpy</span><span class=\"w\"> </span><span class=\"k\">as</span><span class=\"w\"> </span><span class=\"nn\">np</span>\n<span class=\"n\">data</span> <span class=\"o\">=</span> <span class=\"n\">np</span><span class=\"o\">.</span><span class=\"n\">random</span><span class=\"o\">.</span><span class=\"n\">randn</span><span class=\"p\">(</span><span class=\"n\">n</span><span class=\"o\">.</span><span class=\"n\">value</span><span class=\"p\">)</span>   <span class=\"c1\"># recalcul\u00e9 d\u00e8s que n change</span>\n</code></pre></div>\n<h4 id=\"uv-setup-du-projet\">uv \u2014 Setup du projet</h4>\n<div class=\"language-bash codehilite\"><pre><span></span><code><span class=\"c1\"># 1. Installer uv (une seule fois, ~10 secondes)</span>\ncurl<span class=\"w\"> </span>-LsSf<span class=\"w\"> </span>https://astral.sh/uv/install.sh<span class=\"w\"> </span><span class=\"p\">|</span><span class=\"w\"> </span>sh\n\n<span class=\"c1\"># 2. Cr\u00e9er le projet de cours</span>\nuv<span class=\"w\"> </span>init<span class=\"w\"> </span>data_analysis\n<span class=\"nb\">cd</span><span class=\"w\"> </span>data_analysis\n\n<span class=\"c1\"># 3. Ajouter les d\u00e9pendances du cours</span>\nuv<span class=\"w\"> </span>add<span class=\"w\"> </span>pandas<span class=\"w\"> </span>numpy<span class=\"w\"> </span>matplotlib<span class=\"w\"> </span>seaborn<span class=\"w\"> </span>scikit-learn<span class=\"w\"> </span>marimo\n\n<span class=\"c1\"># 4. Lancer marimo</span>\nuv<span class=\"w\"> </span>run<span class=\"w\"> </span>marimo<span class=\"w\"> </span>edit<span class=\"w\"> </span>seance1-0_introduction_analyse_donnees.py\n\n<span class=\"c1\"># Structure g\u00e9n\u00e9r\u00e9e :</span>\n<span class=\"c1\"># seance1_data/</span>\n<span class=\"c1\"># \u251c\u2500\u2500 pyproject.toml   \u2190 d\u00e9pendances et config</span>\n<span class=\"c1\"># \u251c\u2500\u2500 uv.lock          \u2190 versions exactes (reproductibilit\u00e9)</span>\n<span class=\"c1\"># \u2514\u2500\u2500 seance1-0_introduction_analyse_donnees.py</span>\n</code></pre></div></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "44d59aa8979f3ff34bacdf9d7a873cfc",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"partie-2-travaux-pratiques\">\ud83e\uddea PARTIE 2 \u2014 Travaux Pratiques</h2>\n<h3 id=\"dataset-titanic-kaggle\">Dataset : Titanic \u2014 Kaggle</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "b04540c91c12c5c311b8d3a3fff099ed",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Le dataset <strong>Titanic</strong> (Kaggle) contient des informations sur les passagers\ndu navire naufrag\u00e9 en 1912. Il est classiquement utilis\u00e9 pour les premi\u00e8res\nexplorations pandas.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TqIu",
+      "code_hash": "edb52be3f4429b7f45441ea2b5b1619b",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Vxnm",
+      "code_hash": "66f308cef81c1c0bf2e99efb1671284e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"pandas-vs-polars-comparaison-syntaxe\">\ud83d\udea2 pandas vs polars \u2014 Comparaison syntaxe</h3>\n<table>\n<thead>\n<tr>\n<th>Op\u00e9ration</th>\n<th>pandas</th>\n<th>polars</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Chargement</td>\n<td><code>pd.read_csv(\"file.csv\")</code></td>\n<td><code>pl.read_csv(\"file.csv\")</code></td>\n</tr>\n<tr>\n<td>S\u00e9lection colonne</td>\n<td><code>df[\"Age\"]</code></td>\n<td><code>df[\"Age\"]</code> ou <code>df.select(pl.col(\"Age\"))</code></td>\n</tr>\n<tr>\n<td>Filtrage</td>\n<td><code>df[df[\"Survived\"]==1]</code></td>\n<td><code>df.filter(pl.col(\"survived\")==1)</code></td>\n</tr>\n<tr>\n<td>Groupby</td>\n<td><code>df.groupby(\"Pclass\")[\"Fare\"].mean()</code></td>\n<td><code>df.group_by(\"Pclass\").agg(pl.col(\"Fare\").mean())</code></td>\n</tr>\n<tr>\n<td>Null count</td>\n<td><code>df.isnull().sum()</code></td>\n<td><code>df.null_count()</code></td>\n</tr>\n<tr>\n<td>Types</td>\n<td><code>df.dtypes</code></td>\n<td><code>df.schema</code></td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<span class=\"paragraph\">polars utilise des <strong>expressions lazy</strong> cha\u00eenables \u2014 plus expressif pour les transformations complexes.</span>\n</blockquote></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "DnEU",
+      "code_hash": "d0cc0a7787d1c927ee9771b4914b54c3",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ulZA",
+      "code_hash": "5888071f8666198a82d066d5b38a7e0d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"21b-classification-des-variables-du-dataset-titanic\">2.1b \u00b7 Classification des variables du dataset Titanic</h3>\n<span class=\"paragraph\">Appliquer la taxonomie de la <strong>section 1.4</strong> aux colonnes r\u00e9elles \u2014 \u00e9tape\nincontournable avant toute analyse ou mod\u00e9lisation.</span>\n<table>\n<thead>\n<tr>\n<th>Colonne</th>\n<th>Type statistique</th>\n<th>D\u00e9tail</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>Survived</code></td>\n<td>Nominale binaire</td>\n<td><strong>Variable cible</strong> : 0 = d\u00e9c\u00e9d\u00e9, 1 = survivant</td>\n</tr>\n<tr>\n<td><code>Pclass</code></td>\n<td><strong>Ordinale</strong></td>\n<td>Classe de voyage : 1 &gt; 2 &gt; 3 (ordre a du sens)</td>\n</tr>\n<tr>\n<td><code>Name</code></td>\n<td>Nominale textuelle</td>\n<td>Texte libre \u2014 potentiel NLP (titre : Mr, Mrs\u2026)</td>\n</tr>\n<tr>\n<td><code>Sex</code></td>\n<td>Nominale</td>\n<td>2 cat\u00e9gories : male / female</td>\n</tr>\n<tr>\n<td><code>Age</code></td>\n<td><strong>Continue</strong></td>\n<td>En ann\u00e9es d\u00e9cimales \u2014 nombreuses valeurs manquantes</td>\n</tr>\n<tr>\n<td><code>SibSp</code></td>\n<td><strong>Discr\u00e8te</strong></td>\n<td>Nb de fr\u00e8res/s\u0153urs ou conjoints \u00e0 bord (entier)</td>\n</tr>\n<tr>\n<td><code>Parch</code></td>\n<td><strong>Discr\u00e8te</strong></td>\n<td>Nb de parents ou enfants \u00e0 bord (entier)</td>\n</tr>\n<tr>\n<td><code>Ticket</code></td>\n<td>Nominale mixte</td>\n<td>Alphanum\u00e9rique \u2014 peu exploitable brut</td>\n</tr>\n<tr>\n<td><code>Fare</code></td>\n<td><strong>Continue</strong></td>\n<td>Prix du billet en \u00a3 \u2014 distribution tr\u00e8s asym\u00e9trique</td>\n</tr>\n<tr>\n<td><code>Cabin</code></td>\n<td>Nominale mixte</td>\n<td>Lettre (pont) + num\u00e9ro \u2014 77 % de valeurs manquantes</td>\n</tr>\n<tr>\n<td><code>Embarked</code></td>\n<td>Nominale</td>\n<td>Port : S (Southampton), C (Cherbourg), Q (Queenstown)</td>\n</tr>\n<tr>\n<td><code>Boat</code></td>\n<td>Nominale</td>\n<td>Num\u00e9ro du canot de sauvetage \u2014 li\u00e9 \u00e0 la survie</td>\n</tr>\n<tr>\n<td><code>Body</code></td>\n<td>Discr\u00e8te</td>\n<td>Num\u00e9ro du corps r\u00e9cup\u00e9r\u00e9 \u2014 uniquement pour d\u00e9c\u00e9d\u00e9s</td>\n</tr>\n<tr>\n<td><code>HomeDest</code></td>\n<td>Nominale textuelle</td>\n<td>Lieu de r\u00e9sidence / destination \u2014 peu renseign\u00e9</td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<span class=\"paragraph\">\ud83d\udd11 <strong>\u00c0 retenir</strong> : <code>Pclass</code> est <strong>ordinale</strong> (pas juste un entier),\n<code>Age</code> et <code>Fare</code> sont <strong>continues</strong>, <code>SibSp</code> et <code>Parch</code> sont <strong>discr\u00e8tes</strong>.\nCette distinction d\u00e9termine quelle visualisation et quel test statistique utiliser.</span>\n</blockquote></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ecfG",
+      "code_hash": "3e0d67b410f34bad14c0708e7400cf5d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"22-head-tail-shape\">2.2 \u00b7 <code>head()</code>, <code>tail()</code>, <code>shape</code></h3>\n<blockquote>\n<span class=\"paragraph\"><em>\u00ab Pour visualiser l'aspect des donn\u00e9es, on peut utiliser la m\u00e9thode <code>head()</code>,\nqui affiche uniquement les cinq premi\u00e8res lignes. Si l'on passe un nombre en argument,\nce nombre correspond aux lignes qui seront affich\u00e9es. \u00bb</em></span>\n</blockquote>\n<span class=\"paragraph\"><code>shape</code> renvoie <code>(n_lignes, n_colonnes)</code> : <em>\u00ab La commande shape donne exactement le nombre d'\u00e9chantillons\nde donn\u00e9es et de variables. \u00bb</em></span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Pvdt",
+      "code_hash": "a13463125f5333e4eb2ec6d7f7686451",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ZBYS",
+      "code_hash": "a4b8dfde5a6347bc176f43d3413f931d",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "aLJB",
+      "code_hash": "1317af7a39fc55df3324d3f972842172",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"23-dfinfo-structure-types-valeurs-non-nulles\">2.3 \u00b7 <code>df.info()</code> \u2014 Structure, types, valeurs non-nulles</h3>\n<span class=\"paragraph\"><code>info()</code> affiche les <strong>dtypes</strong> (types de donn\u00e9es), le nombre de valeurs\nnon-nulles et la m\u00e9moire utilis\u00e9e.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "nHfw",
+      "code_hash": "87b38bf390f6d7811f38ae394065f54e",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "xXTn",
+      "code_hash": "67a5e98023ec50ce902d6600e864d41f",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "AjVT",
+      "code_hash": "a425270ea292ff9e29f1bac4ff7e9cf5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"24-dfdescribe-statistiques-descriptives\">2.4 \u00b7 <code>df.describe()</code> \u2014 Statistiques descriptives</h3>\n<blockquote>\n<span class=\"paragraph\"><em>\u00ab Si l'on souhaite obtenir rapidement des informations statistiques sur toutes les colonnes\nnum\u00e9riques d'un DataFrame, on peut utiliser la fonction <code>describe()</code>. Le r\u00e9sultat affiche\nle nombre de valeurs, la moyenne, l'\u00e9cart-type, le minimum et le maximum,\nainsi que les percentiles. \u00bb</em></span>\n</blockquote>\n<span class=\"paragraph\"><strong>Sample and Estimated Mean, Variance and Standard Scores</strong> :</span>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: center;\">Statistique</th>\n<th style=\"text-align: center;\">Formule</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: center;\">count</td>\n<td style=\"text-align: center;\"><marimo-tex class=\"arithmatex\">||(n||)</marimo-tex></td>\n<td>Nombre de valeurs non-nulles</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">mean</td>\n<td style=\"text-align: center;\"><marimo-tex class=\"arithmatex\">||(\\bar{x} = \\dfrac{1}{n}\\displaystyle\\sum_{i=1}^{n} x_i||)</marimo-tex></td>\n<td>Moyenne arithm\u00e9tique</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">std</td>\n<td style=\"text-align: center;\"><marimo-tex class=\"arithmatex\">||(s = \\sqrt{\\dfrac{1}{n-1}\\displaystyle\\sum_{i=1}^{n}(x_i - \\bar{x})^2}||)</marimo-tex></td>\n<td>\u00c9cart-type (corrig\u00e9 de Bessel)</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">min / max</td>\n<td style=\"text-align: center;\"><marimo-tex class=\"arithmatex\">||(\\min(x_i)||)</marimo-tex>, <marimo-tex class=\"arithmatex\">||(\\max(x_i)||)</marimo-tex></td>\n<td>Valeurs extr\u00eames</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">25%, 50%, 75%</td>\n<td style=\"text-align: center;\"><marimo-tex class=\"arithmatex\">||(Q_1||)</marimo-tex>, <marimo-tex class=\"arithmatex\">||(Q_2||)</marimo-tex> (m\u00e9diane), <marimo-tex class=\"arithmatex\">||(Q_3||)</marimo-tex></td>\n<td>Quartiles</td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "pHFh",
+      "code_hash": "d72e5adef243879e2728d04baebc8f0e",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "NCOB",
+      "code_hash": "b5df3d2e3fc2f44f84cc2e65ceb82654",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"25-selection-filtrage-groupement\">2.5 \u00b7 S\u00e9lection, filtrage, groupement</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "aqbW",
+      "code_hash": "cf8a6a124b309d155a036b93ca60d981",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "TRpd",
+      "code_hash": "f706b3f1492a7fe46ce0b8a017b4a823",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "TXez",
+      "code_hash": "828250916928724d9a5df0a2f622d994",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "dNNg",
+      "code_hash": "647c69c6f7cd395e9ebd2e5b6667fb87",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "yCnT",
+      "code_hash": "700888ffdfdf83b234955aca1d3a8c78",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "wlCL",
+      "code_hash": "5dbd38817997ea664a35f4ebfe79511e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"26-visualisations-exploratoires\">2.6 \u00b7 Visualisations exploratoires</h3>\n<span class=\"paragraph\">Importance de visualiser les distributions et relations avant\ntoute mod\u00e9lisation.</span>\n<blockquote>\n<span class=\"paragraph\">\ud83d\udca1 Le <strong>boxplot</strong> \u2014 Outlier Treatment) r\u00e9v\u00e8le les outliers\nsur les tarifs \u2014 nous apprendrons \u00e0 les traiter en <strong>S\u00e9ance 2</strong>.</span>\n</blockquote></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "kqZH",
+      "code_hash": "96778dac06e55a37c6b3d412f64e605d",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "wAgl",
+      "code_hash": "0a9dc4ef9645ba838308eb392a383f6a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"26b-violin-plots-correlation-et-visualisations-par-categorie\">2.6b \u00b7 Violin plots, corr\u00e9lation et visualisations par cat\u00e9gorie</h3>\n<span class=\"paragraph\">Le <strong>violin plot</strong> combine le boxplot et la densit\u00e9 de distribution \u2014 il r\u00e9v\u00e8le\nla forme r\u00e9elle de la distribution l\u00e0 o\u00f9 le boxplot la masque (bimodalit\u00e9, asym\u00e9trie).</span>\n<span class=\"paragraph\">La <strong>corr\u00e9lation de Pearson</strong> <marimo-tex class=\"arithmatex\">||(\\rho||)</marimo-tex> mesure la relation lin\u00e9aire entre deux variables continues :</span>\n<marimo-tex class=\"arithmatex\">||[\\rho = \\frac{\\text{cov}(X, Y)}{\\sigma_X \\cdot \\sigma_Y} \\in [-1,\\, 1]||]</marimo-tex><ul>\n<li><marimo-tex class=\"arithmatex\">||(\\rho \\approx 1||)</marimo-tex> : relation positive forte</li>\n<li><marimo-tex class=\"arithmatex\">||(\\rho \\approx 0||)</marimo-tex> : pas de relation lin\u00e9aire</li>\n<li><marimo-tex class=\"arithmatex\">||(\\rho \\approx -1||)</marimo-tex> : relation n\u00e9gative forte</li>\n</ul>\n<blockquote>\n<span class=\"paragraph\">\u26a0\ufe0f <marimo-tex class=\"arithmatex\">||(\\rho||)</marimo-tex> mesure uniquement la <strong>lin\u00e9arit\u00e9</strong> \u2014 deux variables peuvent \u00eatre\nfortement li\u00e9es non-lin\u00e9airement avec <marimo-tex class=\"arithmatex\">||(\\rho \\approx 0||)</marimo-tex>.\nCorr\u00e9lation \u2260 causalit\u00e9 (voir section 1.8).</span>\n</blockquote></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "rEll",
+      "code_hash": "e6a994b87e283570609d1408589c020a",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "dGlV",
+      "code_hash": "d56c30ebe0024a4ca53c23fb10a562d1",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "SdmI",
+      "code_hash": "32773a972276317cef2a79c820103c49",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "lgWD",
+      "code_hash": "e74288fdd9bb4ccec5f6998766a80d4a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"26d-feature-engineering-avant-gout-seance-2\">2.6d \u00b7 Feature Engineering \u2014 Avant-go\u00fbt (S\u00e9ance 2)</h3>\n<span class=\"paragraph\">Le <strong>feature engineering</strong> consiste \u00e0 cr\u00e9er de nouvelles variables \u00e0 partir des donn\u00e9es brutes pour am\u00e9liorer l'analyse et la mod\u00e9lisation. Voici un aper\u00e7u des techniques d\u00e9taill\u00e9es en <strong>S\u00e9ance 2</strong>.</span>\n<table>\n<thead>\n<tr>\n<th>Feature cr\u00e9\u00e9</th>\n<th>Source</th>\n<th>Int\u00e9r\u00eat</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>FamilySize</code></td>\n<td><code>SibSp + Parch + 1</code></td>\n<td>Familles de 2-4 survivent mieux</td>\n</tr>\n<tr>\n<td><code>IsAlone</code></td>\n<td><code>FamilySize == 1</code></td>\n<td>Passagers seuls \u2192 moins de survie</td>\n</tr>\n<tr>\n<td><code>AgeGroup</code></td>\n<td><code>pd.cut(Age, ...)</code></td>\n<td>Enfants \u2192 taux de survie \u00e9lev\u00e9</td>\n</tr>\n<tr>\n<td><code>Title</code></td>\n<td>Extraction depuis <code>Name</code> (Mr, Mrs, Miss\u2026)</td>\n<td>Proxy du statut social</td>\n</tr>\n<tr>\n<td><code>HasCabin</code></td>\n<td><code>Cabin.notna()</code></td>\n<td>Indicatrice \u2014 1\u00e8re classe en g\u00e9n\u00e9ral</td>\n</tr>\n</tbody>\n</table></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "yOPj",
+      "code_hash": "bcab44fa0e0b18553183cbc98695a131",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "fwwy",
+      "code_hash": "9f7ca09d528671e8862d5d81f065176b",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "LJZf",
+      "code_hash": "19ca9339bd206164c8fa4888daaf82f5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"26c-traintest-split-preparer-la-modelisation\">2.6c \u00b7 Train/Test Split \u2014 Pr\u00e9parer la mod\u00e9lisation</h3>\n<span class=\"paragraph\">Avant de construire un mod\u00e8le (s\u00e9ances 5\u20136), on s\u00e9pare le dataset en deux :</span>\n<table>\n<thead>\n<tr>\n<th>Ensemble</th>\n<th style=\"text-align: center;\">Proportion</th>\n<th>R\u00f4le</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Train</strong></td>\n<td style=\"text-align: center;\">80 %</td>\n<td>Apprentissage du mod\u00e8le</td>\n</tr>\n<tr>\n<td><strong>Test</strong></td>\n<td style=\"text-align: center;\">20 %</td>\n<td>\u00c9valuation sur donn\u00e9es jamais vues</td>\n</tr>\n</tbody>\n</table>\n<span class=\"paragraph\"><strong>Pourquoi <code>stratify</code> ?</strong>\nSans stratification, le hasard pourrait cr\u00e9er un test set avec\n70 % de survivants alors que le dataset r\u00e9el en contient 38 %.\nLe mod\u00e8le serait \u00e9valu\u00e9 sur une distribution biais\u00e9e.\n<code>stratify=df[\"Survived\"]</code> garantit que la proportion 62/38 est maintenue\ndans les deux ensembles.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "urSm",
+      "code_hash": "d56c953924f26174e2ae864f6e0db3e8",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "jxvo",
+      "code_hash": "124ba51a18a510e3561466bbbf686c2c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"27-widgets-reactifs-marimo\">2.7 \u00b7 Widgets r\u00e9actifs marimo</h3>\n<span class=\"paragraph\">Contrairement \u00e0 Jupyter, marimo\nint\u00e8gre l'interactivit\u00e9 nativement : modifier un widget <strong>recalcule\nautomatiquement</strong> toutes les cellules d\u00e9pendantes.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "mWxS",
+      "code_hash": "c5da8d4f4bbda34d4ac95f0763b68868",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "CcZR",
+      "code_hash": "7c13286ff87c05f93df69759beadc532",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "YWSi",
+      "code_hash": "b1cd955e4123b2a5861e0e1b54c8f15f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"exercices-a-faire-en-binome\">\ud83c\udfcb\ufe0f Exercices \u2014 \u00c0 faire en bin\u00f4me</h2>\n<span class=\"paragraph\"><em>Cr\u00e9er un nouveau notebook marimo app\u00e9l\u00e9 TP_seance1-0. Faire le tuto pas \u00e0 pas et prennez le temps de comprendre les output avant d'avancer.</em></span>\n<span class=\"paragraph\"><strong>Exercice 1 \u2014 Exploration</strong>\n<div class=\"language-python codehilite\"><pre><span></span><code><span class=\"c1\"># a) Affichez les types de chaque colonne</span>\n<span class=\"nb\">print</span><span class=\"p\">(</span><span class=\"n\">df</span><span class=\"o\">.</span><span class=\"n\">dtypes</span><span class=\"p\">)</span>\n\n<span class=\"c1\"># b) Comptez par port d&#39;embarquement</span>\n<span class=\"nb\">print</span><span class=\"p\">(</span><span class=\"n\">df</span><span class=\"o\">.</span><span class=\"n\">groupby</span><span class=\"p\">(</span><span class=\"s2\">&quot;Embarked&quot;</span><span class=\"p\">)</span><span class=\"o\">.</span><span class=\"n\">size</span><span class=\"p\">())</span>\n\n<span class=\"c1\"># c) Tarif moyen par classe</span>\n<span class=\"nb\">print</span><span class=\"p\">(</span><span class=\"n\">df</span><span class=\"o\">.</span><span class=\"n\">groupby</span><span class=\"p\">(</span><span class=\"s2\">&quot;Pclass&quot;</span><span class=\"p\">)[</span><span class=\"s2\">&quot;Fare&quot;</span><span class=\"p\">]</span><span class=\"o\">.</span><span class=\"n\">mean</span><span class=\"p\">()</span><span class=\"o\">.</span><span class=\"n\">round</span><span class=\"p\">(</span><span class=\"mi\">2</span><span class=\"p\">))</span>\n\n<span class=\"c1\"># d) Taux de survie global</span>\n<span class=\"nb\">print</span><span class=\"p\">(</span><span class=\"sa\">f</span><span class=\"s2\">&quot;Taux global : </span><span class=\"si\">{</span><span class=\"n\">df</span><span class=\"p\">[</span><span class=\"s1\">&#39;Survived&#39;</span><span class=\"p\">]</span><span class=\"o\">.</span><span class=\"n\">mean</span><span class=\"p\">()</span><span class=\"o\">*</span><span class=\"mi\">100</span><span class=\"si\">:</span><span class=\"s2\">.1f</span><span class=\"si\">}</span><span class=\"s2\">%&quot;</span><span class=\"p\">)</span>\n</code></pre></div></span>\n<span class=\"paragraph\"><strong>Exercice 2 \u2014 Manipulation</strong>\n<div class=\"language-python codehilite\"><pre><span></span><code><span class=\"c1\"># a) Cr\u00e9er une colonne cat\u00e9gorie d&#39;\u00e2ge (variable ordinale)</span>\n<span class=\"n\">df</span><span class=\"p\">[</span><span class=\"s2\">&quot;Cat_age&quot;</span><span class=\"p\">]</span> <span class=\"o\">=</span> <span class=\"n\">pd</span><span class=\"o\">.</span><span class=\"n\">cut</span><span class=\"p\">(</span><span class=\"n\">df</span><span class=\"p\">[</span><span class=\"s2\">&quot;Age&quot;</span><span class=\"p\">],</span>\n                       <span class=\"n\">bins</span><span class=\"o\">=</span><span class=\"p\">[</span><span class=\"mi\">0</span><span class=\"p\">,</span> <span class=\"mi\">12</span><span class=\"p\">,</span> <span class=\"mi\">18</span><span class=\"p\">,</span> <span class=\"mi\">60</span><span class=\"p\">,</span> <span class=\"mi\">100</span><span class=\"p\">],</span>\n                       <span class=\"n\">labels</span><span class=\"o\">=</span><span class=\"p\">[</span><span class=\"s2\">&quot;Enfant&quot;</span><span class=\"p\">,</span> <span class=\"s2\">&quot;Ado&quot;</span><span class=\"p\">,</span> <span class=\"s2\">&quot;Adulte&quot;</span><span class=\"p\">,</span> <span class=\"s2\">&quot;Senior&quot;</span><span class=\"p\">])</span>\n\n<span class=\"c1\"># b) Remplacer les \u00e2ges manquants par la m\u00e9diane</span>\n<span class=\"n\">df</span><span class=\"p\">[</span><span class=\"s2\">&quot;Age_imputed&quot;</span><span class=\"p\">]</span> <span class=\"o\">=</span> <span class=\"n\">df</span><span class=\"p\">[</span><span class=\"s2\">&quot;Age&quot;</span><span class=\"p\">]</span><span class=\"o\">.</span><span class=\"n\">fillna</span><span class=\"p\">(</span><span class=\"n\">df</span><span class=\"p\">[</span><span class=\"s2\">&quot;Age&quot;</span><span class=\"p\">]</span><span class=\"o\">.</span><span class=\"n\">median</span><span class=\"p\">())</span>\n\n<span class=\"c1\"># c) Taux de survie par cat\u00e9gorie d&#39;\u00e2ge</span>\n<span class=\"nb\">print</span><span class=\"p\">(</span><span class=\"n\">df</span><span class=\"o\">.</span><span class=\"n\">groupby</span><span class=\"p\">(</span><span class=\"s2\">&quot;Cat_age&quot;</span><span class=\"p\">)[</span><span class=\"s2\">&quot;Survived&quot;</span><span class=\"p\">]</span><span class=\"o\">.</span><span class=\"n\">mean</span><span class=\"p\">()</span><span class=\"o\">.</span><span class=\"n\">mul</span><span class=\"p\">(</span><span class=\"mi\">100</span><span class=\"p\">)</span><span class=\"o\">.</span><span class=\"n\">round</span><span class=\"p\">(</span><span class=\"mi\">1</span><span class=\"p\">))</span>\n</code></pre></div></span>\n<span class=\"paragraph\"><strong>Exercice 3 \u2014 Visualisation</strong>\n<div class=\"language-python codehilite\"><pre><span></span><code><span class=\"kn\">import</span><span class=\"w\"> </span><span class=\"nn\">matplotlib.pyplot</span><span class=\"w\"> </span><span class=\"k\">as</span><span class=\"w\"> </span><span class=\"nn\">plt</span>\n\n<span class=\"c1\"># Boxplot \u00e2ge selon survie \u2014 [R1] Chap. 3.3.3</span>\n<span class=\"n\">fig</span><span class=\"p\">,</span> <span class=\"n\">ax</span> <span class=\"o\">=</span> <span class=\"n\">plt</span><span class=\"o\">.</span><span class=\"n\">subplots</span><span class=\"p\">(</span><span class=\"n\">figsize</span><span class=\"o\">=</span><span class=\"p\">(</span><span class=\"mi\">7</span><span class=\"p\">,</span> <span class=\"mi\">4</span><span class=\"p\">))</span>\n<span class=\"n\">df</span><span class=\"o\">.</span><span class=\"n\">boxplot</span><span class=\"p\">(</span><span class=\"n\">column</span><span class=\"o\">=</span><span class=\"s2\">&quot;Age&quot;</span><span class=\"p\">,</span> <span class=\"n\">by</span><span class=\"o\">=</span><span class=\"s2\">&quot;Survived&quot;</span><span class=\"p\">,</span> <span class=\"n\">ax</span><span class=\"o\">=</span><span class=\"n\">ax</span><span class=\"p\">)</span>\n<span class=\"n\">ax</span><span class=\"o\">.</span><span class=\"n\">set_title</span><span class=\"p\">(</span><span class=\"s2\">&quot;Distribution des \u00e2ges selon la survie&quot;</span><span class=\"p\">)</span>\n<span class=\"n\">ax</span><span class=\"o\">.</span><span class=\"n\">set_xlabel</span><span class=\"p\">(</span><span class=\"s2\">&quot;Survived (0=D\u00e9c\u00e9d\u00e9, 1=Survivant)&quot;</span><span class=\"p\">)</span>\n<span class=\"n\">plt</span><span class=\"o\">.</span><span class=\"n\">suptitle</span><span class=\"p\">(</span><span class=\"s2\">&quot;</span><span class=\"se\">\\&quot;</span><span class=\"s2\">)</span>\n<span class=\"n\">plt</span><span class=\"o\">.</span><span class=\"n\">show</span><span class=\"p\">()</span>\n</code></pre></div></span>\n<hr />\n<span class=\"paragraph\"><em>\u2192 </em><em>S\u00e9ance 1-1</em><em> : Prise en main de Python pour l'analyse de donn\u00e9es</em>\n<em>Outils : pandas, ydata-profiling \u00b7 Dataset : Online Retail (UCI)</em></span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "zlud",
+      "code_hash": "7250a4c637b9400c96b43cef2371fc47",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><hr />\n<h2 id=\"references-bibliographiques\">\ud83d\udcda R\u00e9f\u00e9rences bibliographiques</h2>\n<span class=\"paragraph\"><strong>[R1]</strong> Igual, L. &amp; Segu\u00ed, S. (2017). <em>Introduction to Data Science \u2014 A Python Approach to Concepts, Techniques and Applications</em>. Springer.</span>\n<span class=\"paragraph\"><strong>[R2]</strong> McKinney, W. (2022). <em>Python for Data Analysis</em> (3\u1d49 \u00e9d.). O'Reilly Media.</span>\n<span class=\"paragraph\"><strong>[R3]</strong> VanderPlas, J. (2017). <em>Python Data Science Handbook</em>. O'Reilly Media. <em>(disponible librement en ligne)</em></span>\n<span class=\"paragraph\"><strong>Jeu de donn\u00e9es</strong> \u00b7 Titanic Passenger Dataset \u2014 Kaggle Competition <em>\"Titanic: Machine Learning from Disaster\"</em>\nSource : <a href=\"https://www.kaggle.com/c/titanic\" rel=\"noopener noreferrer\" target=\"_blank\">kaggle.com/c/titanic</a> \u00b7 Licence : Open</span>\n<span class=\"paragraph\"><strong>Outils</strong> \u00b7 Python 3.11+ \u00b7 <a href=\"https://marimo.io\" rel=\"noopener noreferrer\" target=\"_blank\">marimo</a> \u00b7 <a href=\"https://docs.astral.sh/uv\" rel=\"noopener noreferrer\" target=\"_blank\">uv</a> \u00b7\npandas \u00b7 NumPy \u00b7 matplotlib \u00b7 seaborn \u00b7 scikit-learn</span>\n<hr /></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "tZnO",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "NjhC",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    }
+  ]
+}
